@@ -53,22 +53,28 @@ struct HomeView: View {
     
     var missionSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("新しいミッションが届いています")
-                .font(.headline)
-                .padding(.leading)
-            
-            ForEach(viewModel.newMissions) { mission in
-                MissionRowView(mission: mission, isNew: true)
-                    .padding(.horizontal)
+            if viewModel.newMissions.count > 0 {
+                Text("新しいミッションが届いています")
+                    .font(.headline)
+                    .padding(.leading)
+                
+                ForEach(viewModel.newMissions) { mission in
+                    MissionRowView(mission: mission, isNew: true)
+                        .padding(.horizontal)
+                }
             }
             
-            Text("進行中のミッション")
-                .font(.headline)
-                .padding(.leading)
-            
-            ForEach(viewModel.ongoingMissions) { mission in
-                MissionRowView(mission: mission, isNew: false)
-                    .padding(.horizontal)
+            if viewModel.ongoingMissions.count > 0 {
+                Text("進行中のミッション")
+                    .font(.headline)
+                    .padding(.leading)
+                
+                ForEach(viewModel.ongoingMissions) { mission in
+                    MissionRowView(mission: mission, isNew: false)
+                        .padding(.horizontal)
+                }
+            } else {
+                Text("進行中のミッションはありません").frame(alignment: .center)
             }
         }
     }
