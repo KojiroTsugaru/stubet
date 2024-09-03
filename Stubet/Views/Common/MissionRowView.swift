@@ -42,7 +42,3 @@ struct MissionRowView: View {
     }
 }
 
-
-//#Preview {
-//    MissionRowView()
-//}
