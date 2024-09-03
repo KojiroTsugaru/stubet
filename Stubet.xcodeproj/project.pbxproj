@@ -98,6 +98,8 @@
 		311A57542C86D94A0040AA9A /* Stubet */ = {
 			isa = PBXGroup;
 			children = (
+				311A57842C86DFF00040AA9A /* Views */,
+				311A57852C86E0FD0040AA9A /* Models */,
 				311A57552C86D94A0040AA9A /* StubetApp.swift */,
 				311A57572C86D94A0040AA9A /* ContentView.swift */,
 				311A57592C86D94D0040AA9A /* Assets.xcassets */,
@@ -131,6 +133,20 @@
 				311A57772C86D94D0040AA9A /* StubetUITestsLaunchTests.swift */,
 			);
 			path = StubetUITests;
+			sourceTree = "<group>";
+		};
+		311A57842C86DFF00040AA9A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		311A57852C86E0FD0040AA9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
