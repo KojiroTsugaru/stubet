@@ -25,9 +25,19 @@ class HomeViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    init() {
-        fetchMissions()
-        fetchBets()
+    init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
+         newBets: [Bet] = [], ongoingBets: [Bet] = []) {
+        if newMissions.isEmpty && ongoingMissions.isEmpty && newBets.isEmpty && ongoingBets.isEmpty {
+            // Fetch from Firebase only if no dummy data is provided
+            fetchMissions()
+            fetchBets()
+        } else {
+            // Use dummy data if provided
+            self.newMissions = newMissions
+            self.ongoingMissions = ongoingMissions
+            self.newBets = newBets
+            self.ongoingBets = ongoingBets
+        }
     }
     
     func fetchMissions() {
@@ -44,7 +54,7 @@ class HomeViewModel: ObservableObject {
                 return Mission(id: doc.documentID, data: data)
             }
             
-            self.ongoingMissions = self.newMissions // Just for example, adjust logic accordingly
+            self.ongoingMissions = self.newMissions // Adjust logic accordingly
         }
     }
     
@@ -62,7 +72,7 @@ class HomeViewModel: ObservableObject {
                 return Bet(id: doc.documentID, data: data)
             }
             
-            self.ongoingBets = self.newBets // Just for example, adjust logic accordingly
+            self.ongoingBets = self.newBets // Adjust logic accordingly
         }
     }
 }

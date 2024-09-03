@@ -43,6 +43,6 @@ struct MissionRowView: View {
 }
 
 
-#Preview {
-    MissionRowView()
-}
+//#Preview {
+//    MissionRowView()
+//}
