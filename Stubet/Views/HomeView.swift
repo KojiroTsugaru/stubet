@@ -12,51 +12,49 @@ struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                // Tab Switching: ミッション and ペット buttons
-                HStack {
-                    Button(action: {
-                        viewModel.selectedTab = .mission
-                    }) {
-                        Text("ミッション")
-                            .padding()
-                            .background(viewModel.selectedTab == .mission ? Color.orange : Color.clear)
-                            .foregroundColor(viewModel.selectedTab == .mission ? .white : .gray)
-                            .cornerRadius(20)
-                    }
-                    Spacer()
-                    Button(action: {
-                        viewModel.selectedTab = .bet
-                    }) {
-                        Text("ベット")
-                            .padding()
-                            .background(viewModel.selectedTab == .bet ? Color.orange : Color.clear)
-                            .foregroundColor(viewModel.selectedTab == .bet ? .white : .gray)
-                            .cornerRadius(20)
-                    }
+        VStack {
+            // Tab Switching: ミッション and ペット buttons
+            HStack {
+                Button(action: {
+                    viewModel.selectedTab = .mission
+                }) {
+                    Text("ミッション")
+                        .padding()
+                        .background(viewModel.selectedTab == .mission ? Color.orange : Color.clear)
+                        .foregroundColor(viewModel.selectedTab == .mission ? .white : .gray)
+                        .cornerRadius(20)
                 }
-                .padding(.horizontal)
-                
-                // Content depending on the selected tab
-                ScrollView {
-                    if viewModel.selectedTab == .mission {
-                        missionSection
-                    } else {
-                        betSection
-                    }
+                Spacer()
+                Button(action: {
+                    viewModel.selectedTab = .bet
+                }) {
+                    Text("ベット")
+                        .padding()
+                        .background(viewModel.selectedTab == .bet ? Color.orange : Color.clear)
+                        .foregroundColor(viewModel.selectedTab == .bet ? .white : .gray)
+                        .cornerRadius(20)
                 }
             }
-            .navigationTitle("ホーム")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(
-                trailing: NavigationLink(destination: NewBetView()) {
-                    Image(systemName: "plus")
-                        .font(.title2)
-                })
-            .background(Color(UIColor.systemGroupedBackground))
-            .edgesIgnoringSafeArea(.bottom)
-        }.accentColor(Color.orange)
+            .padding(.horizontal)
+            
+            // Content depending on the selected tab
+            ScrollView {
+                if viewModel.selectedTab == .mission {
+                    missionSection
+                } else {
+                    betSection
+                }
+            }
+        }
+        .navigationTitle("ホーム")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(
+            trailing: NavigationLink(destination: NewBetView()) {
+                Image(systemName: "plus")
+                    .font(.title2)
+            })
+        .background(Color(UIColor.systemGroupedBackground))
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     var missionSection: some View {

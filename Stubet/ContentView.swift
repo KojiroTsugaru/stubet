@@ -16,18 +16,21 @@ struct ContentView: View {
     }
     
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text("ホーム")
-                }
+        NavigationView {
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "house")
+                        Text("ホーム")
+                    }
+                
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("プロフィール")
+                    }
+            }
             
-            HomeView()
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("プロフィール")
-                }
         }.accentColor(Color.orange)
     }
 }
