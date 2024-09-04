@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Mission {
+struct Mission: Identifiable {
     let id: String
     let title: String
     let description: String

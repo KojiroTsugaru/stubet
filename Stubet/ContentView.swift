@@ -9,7 +9,12 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-
+    
+    init() {
+        // Set tab bar appearance
+        UITabBar.appearance().backgroundColor = UIColor.white
+    }
+    
     var body: some View {
         TabView {
             HomeView()
