@@ -15,27 +15,31 @@ struct HomeView: View {
         VStack {
             // Tab Switching: ミッション and ペット buttons
             HStack {
+                Spacer()
                 Button(action: {
                     viewModel.selectedTab = .mission
                 }) {
                     Text("ミッション")
-                        .padding()
+                        .font(.system(size: 12))
+                        .padding(10)
                         .background(viewModel.selectedTab == .mission ? Color.orange : Color.clear)
                         .foregroundColor(viewModel.selectedTab == .mission ? .white : .gray)
-                        .cornerRadius(20)
+                        .cornerRadius(48)
                 }
                 Spacer()
                 Button(action: {
                     viewModel.selectedTab = .bet
                 }) {
                     Text("ベット")
-                        .padding()
+                        .font(.system(size: 12))
+                        .padding(10)
                         .background(viewModel.selectedTab == .bet ? Color.orange : Color.clear)
                         .foregroundColor(viewModel.selectedTab == .bet ? .white : .gray)
-                        .cornerRadius(20)
+                        .cornerRadius(48)
                 }
+                Spacer()
             }
-            .padding(.horizontal)
+            .padding(.bottom)
             
             // Content depending on the selected tab
             ScrollView {
@@ -90,22 +94,30 @@ struct HomeView: View {
     // MARK: - Bet Section
     var betSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("新しいベットが届いています")
-                .font(.headline)
-                .padding(.leading)
-            
-            ForEach(viewModel.newBets) { bet in
-                BetRowView(bet: bet, isNew: true)
-                    .padding(.horizontal)
+            if viewModel.newBets.count > 0 {
+                Text("新しいベットが届いています")
+                    .font(.headline)
+                    .padding(.leading)
+                
+                ForEach(viewModel.newBets) { bet in
+                    BetRowView(bet: bet, isNew: true)
+                        .padding(.horizontal)
+                }
             }
             
-            Text("進行中のベット")
-                .font(.headline)
-                .padding(.leading)
-            
-            ForEach(viewModel.ongoingBets) { bet in
-                BetRowView(bet: bet, isNew: false)
-                    .padding(.horizontal)
+            if viewModel.ongoingBets.count > 0 {
+                Text("進行中のベット")
+                    .font(.headline)
+                    .padding(.leading)
+                
+                ForEach(viewModel.ongoingBets) { bet in
+                    BetRowView(bet: bet, isNew: false)
+                        .padding(.horizontal)
+                }
+            } else {
+                Text("進行中ベットはありません")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .offset(y: 250)
             }
         }
     }
