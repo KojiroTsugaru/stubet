@@ -15,25 +15,29 @@ struct HomeView: View {
         VStack {
             // Tab Switching: ミッション and ペット buttons
             HStack {
+                Spacer()
                 Button(action: {
                     viewModel.selectedTab = .mission
                 }) {
                     Text("ミッション")
-                        .padding()
+                        .font(.system(size: 12))
+                        .padding(10)
                         .background(viewModel.selectedTab == .mission ? Color.orange : Color.clear)
                         .foregroundColor(viewModel.selectedTab == .mission ? .white : .gray)
-                        .cornerRadius(20)
+                        .cornerRadius(48)
                 }
                 Spacer()
                 Button(action: {
                     viewModel.selectedTab = .bet
                 }) {
                     Text("ベット")
-                        .padding()
+                        .font(.system(size: 12))
+                        .padding(10)
                         .background(viewModel.selectedTab == .bet ? Color.orange : Color.clear)
                         .foregroundColor(viewModel.selectedTab == .bet ? .white : .gray)
-                        .cornerRadius(20)
+                        .cornerRadius(48)
                 }
+                Spacer()
             }
             .padding(.horizontal)
             
@@ -42,7 +46,7 @@ struct HomeView: View {
                 if viewModel.selectedTab == .mission {
                     missionSection
                 } else {
-                    betSection
+                    betSection  
                 }
             }
         }
