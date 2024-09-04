@@ -44,11 +44,17 @@ struct HomeView: View {
                     }
                 }
             }
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+            
             .background(Color(UIColor.systemGroupedBackground))
             .edgesIgnoringSafeArea(.bottom)
-        }
+            .navigationBarHidden(false)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(
+                trailing: NavigationLink(destination: NewBetView()) {
+                    Image(systemName: "plus")
+                        .font(.title2)
+                })
+        }.accentColor(Color.orange)
     }
     
     var missionSection: some View {

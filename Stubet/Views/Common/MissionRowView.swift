@@ -41,4 +41,3 @@ struct MissionRowView: View {
         .shadow(radius: 1)
     }
 }
-
