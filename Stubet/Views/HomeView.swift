@@ -39,14 +39,14 @@ struct HomeView: View {
                 }
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.bottom)
             
             // Content depending on the selected tab
             ScrollView {
                 if viewModel.selectedTab == .mission {
                     missionSection
                 } else {
-                    betSection  
+                    betSection
                 }
             }
         }
@@ -94,22 +94,30 @@ struct HomeView: View {
     // MARK: - Bet Section
     var betSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("新しいベットが届いています")
-                .font(.headline)
-                .padding(.leading)
-            
-            ForEach(viewModel.newBets) { bet in
-                BetRowView(bet: bet, isNew: true)
-                    .padding(.horizontal)
+            if viewModel.newBets.count > 0 {
+                Text("新しいベットが届いています")
+                    .font(.headline)
+                    .padding(.leading)
+                
+                ForEach(viewModel.newBets) { bet in
+                    BetRowView(bet: bet, isNew: true)
+                        .padding(.horizontal)
+                }
             }
             
-            Text("進行中のベット")
-                .font(.headline)
-                .padding(.leading)
-            
-            ForEach(viewModel.ongoingBets) { bet in
-                BetRowView(bet: bet, isNew: false)
-                    .padding(.horizontal)
+            if viewModel.ongoingBets.count > 0 {
+                Text("進行中のベット")
+                    .font(.headline)
+                    .padding(.leading)
+                
+                ForEach(viewModel.ongoingBets) { bet in
+                    BetRowView(bet: bet, isNew: false)
+                        .padding(.horizontal)
+                }
+            } else {
+                Text("進行中ベットはありません")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .offset(y: 250)
             }
         }
     }
