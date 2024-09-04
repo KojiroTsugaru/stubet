@@ -27,6 +27,9 @@
 		317581062C8739A700DD5B13 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 317581052C8739A700DD5B13 /* FirebaseAuth */; };
 		317581082C8739A700DD5B13 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 317581072C8739A700DD5B13 /* FirebaseFirestore */; };
 		3175810A2C880B9300DD5B13 /* NewBetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581092C880B9300DD5B13 /* NewBetView.swift */; };
+		3175810C2C88146500DD5B13 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810B2C88146500DD5B13 /* UserModel.swift */; };
+		3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810D2C8816C900DD5B13 /* FriendModel.swift */; };
+		317581102C88195D00DD5B13 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810F2C88195D00DD5B13 /* LocationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		317580FD2C8701C600DD5B13 /* BetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetRowView.swift; sourceTree = "<group>"; };
 		317581002C87313900DD5B13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		317581092C880B9300DD5B13 /* NewBetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetView.swift; sourceTree = "<group>"; };
+		3175810B2C88146500DD5B13 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		3175810D2C8816C900DD5B13 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
+		3175810F2C88195D00DD5B13 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,9 @@
 			children = (
 				317580F52C86FF3600DD5B13 /* MissionModel.swift */,
 				317580F72C8700E600DD5B13 /* BetModel.swift */,
+				3175810B2C88146500DD5B13 /* UserModel.swift */,
+				3175810D2C8816C900DD5B13 /* FriendModel.swift */,
+				3175810F2C88195D00DD5B13 /* LocationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -341,9 +350,12 @@
 				317580F62C86FF3600DD5B13 /* MissionModel.swift in Sources */,
 				317580FA2C87014400DD5B13 /* HomeViewModel.swift in Sources */,
 				311A57622C86D94D0040AA9A /* Stubet.xcdatamodeld in Sources */,
+				3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */,
 				311A57872C86E6080040AA9A /* HomeView.swift in Sources */,
 				317580FE2C8701C600DD5B13 /* BetRowView.swift in Sources */,
 				317580F82C8700E600DD5B13 /* BetModel.swift in Sources */,
+				3175810C2C88146500DD5B13 /* UserModel.swift in Sources */,
+				317581102C88195D00DD5B13 /* LocationModel.swift in Sources */,
 				311A57562C86D94A0040AA9A /* StubetApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
