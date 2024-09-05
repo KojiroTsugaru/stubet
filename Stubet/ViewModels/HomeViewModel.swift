@@ -24,15 +24,9 @@ class HomeViewModel: ObservableObject {
     
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
-        self.currentUserId = "user890"
-        if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
-    private var currentUserId: String?
-
-    init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
-         newBets: [Bet] = [], ongoingBets: [Bet] = []) {
         // UserProviderからcurrentUserIdを取得
         self.currentUserId = UserProvider.shared.getCurrentUserId()
-        if newMissions.isEmpty && ongoingMissions.isEmpty && newBets.isEmpty && ongoingBets.isEmpty {
+        if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
             // Fetch from Firebase only if no dummy data is provided
             fetchBets()
         } else {
