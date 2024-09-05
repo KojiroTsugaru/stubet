@@ -42,6 +42,7 @@
 		4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D902C880FB900543A57 /* LoginViewModel.swift */; };
 		4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8A2C8952690061921E /* SignupViewModel.swift */; };
 		4CEB9A8D2C8952930061921E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8C2C8952930061921E /* SignupView.swift */; };
+		67EF59F42C89A55B0009757A /* FriendRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EF59F32C89A55B0009757A /* FriendRequestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		4CEB9A8C2C8952930061921E /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		67EF59F32C89A55B0009757A /* FriendRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 				3175810B2C88146500DD5B13 /* UserModel.swift */,
 				3175810D2C8816C900DD5B13 /* FriendModel.swift */,
 				3175810F2C88195D00DD5B13 /* LocationModel.swift */,
+				67EF59F32C89A55B0009757A /* FriendRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */,
 				311A57872C86E6080040AA9A /* HomeView.swift in Sources */,
 				317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */,
+				67EF59F42C89A55B0009757A /* FriendRequestModel.swift in Sources */,
 				317580FE2C8701C600DD5B13 /* BetRowView.swift in Sources */,
 				4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */,
 				4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */,
