@@ -35,10 +35,14 @@ struct ContentView: View {
             
             // Profile view
             NavigationView{
-                HomeView()
+                ProfileView()
                     .navigationTitle("プロフィール")
                     .navigationBarTitleDisplayMode(.inline)
-            }
+                    .navigationBarItems(
+                        trailing: NavigationLink(destination: ProfileView()) {
+                            Image(systemName: "plus")
+                                .font(.title2)
+                        })            }
             .tabItem {
                 Image(systemName: "person.fill")
                 Text("プロフィール")
