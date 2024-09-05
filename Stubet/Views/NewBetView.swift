@@ -9,7 +9,10 @@ import SwiftUI
 
 struct NewBetView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("New Bet View")
+        } .navigationBarHidden(false) // Hide the navigation bar
+            .toolbar(.hidden, for: .tabBar)  // Hide the tab bar
     }
 }
 

@@ -48,8 +48,8 @@ struct MissionRowView: View {
         .background(isNew ?
                     AnyView(LinearGradient(
                         stops: [
-                            Gradient.Stop(color: Color(red: 1.00, green: 0.75, blue: 0.29), location: 0.00),
-                            Gradient.Stop(color: Color(red: 1.00, green: 0.62, blue: 0.29), location: 1.00),
+                            .init(color: Color(red: 1.00, green: 0.75, blue: 0.29), location: 0.00),
+                            .init(color: Color(red: 1.00, green: 0.62, blue: 0.29), location: 1.00),
                         ],
                         startPoint: UnitPoint(x: 1, y: 0),
                         endPoint: UnitPoint(x: 0, y: 1)

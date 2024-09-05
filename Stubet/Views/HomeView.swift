@@ -50,13 +50,6 @@ struct HomeView: View {
                 }
             }
         }
-        .navigationTitle("ホーム")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(
-            trailing: NavigationLink(destination: NewBetView()) {
-                Image(systemName: "plus")
-                    .font(.title2)
-            })
         .background(Color(UIColor.systemGroupedBackground))
         .edgesIgnoringSafeArea(.bottom)
     }
@@ -67,6 +60,8 @@ struct HomeView: View {
                 Text("新しいミッションが届いています")
                     .font(.headline)
                     .padding(.leading)
+                
+                
                 
                 ForEach(viewModel.newMissions) { mission in
                     MissionRowView(mission: mission, isNew: true)
@@ -95,13 +90,15 @@ struct HomeView: View {
     var betSection: some View {
         VStack(alignment: .leading, spacing: 20) {
             if viewModel.newBets.count > 0 {
-                Text("新しいベットが届いています")
+                Text("報酬を受け取っていません！")
                     .font(.headline)
                     .padding(.leading)
                 
                 ForEach(viewModel.newBets) { bet in
-                    BetRowView(bet: bet, isNew: true)
-                        .padding(.horizontal)
+                    NavigationLink(destination: BetDetailsView(bet: bet)) {
+                        BetRowView(bet: bet, isNew: true)
+                    }
+                    .padding(.horizontal)
                 }
             }
             
