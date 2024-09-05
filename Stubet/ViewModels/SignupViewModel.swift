@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import FirebaseAuth
 import Foundation
+import FirebaseFirestore
 
 class SignupViewModel: ObservableObject {
     @Published var username = ""
@@ -52,7 +53,7 @@ class SignupViewModel: ObservableObject {
         
         
     }
-
+        
     func signup() {
         validateFields()
 
@@ -70,17 +71,35 @@ class SignupViewModel: ObservableObject {
                     // ユーザー登録成功時の処理
                     self.showError = false
                     self.errorMessage = ""
-                    
+
                     // リフレッシュトークンの保存
                     if let refreshToken = authResult?.user.refreshToken {
                         UserDefaults.standard.set(refreshToken, forKey: "userRefreshToken")
                     }
-                    
+
+                    // Firestoreにユーザー情報を保存
+                    if let user = authResult?.user {
+                        let db = Firestore.firestore()
+                        let userData: [String: Any] = [
+                            "username": self.username, // ユーザー名を追加
+                            "email": user.email ?? "",
+                            "uid": user.uid
+                            // 必要に応じて他のフィールドを追加
+                        ]
+                        db.collection("users").document(user.uid).setData(userData) { error in
+                            if let error = error {
+                                print("Error saving user data to Firestore: \(error)")
+                            } else {
+                                print("User data saved to Firestore successfully")
+                            }
+                        }
+                    }
+
                     print("User signed up successfully: \(authResult?.user.email ?? "")")
 
                     // ログイン処理を完了させる（必要に応じて実装を調整）
                     // 例: ログイン状態を管理するフラグを更新する、ユーザー情報を保存するなど
-                    
+
                     // ホーム画面に遷移
                 }
             }

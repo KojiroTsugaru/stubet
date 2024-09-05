@@ -15,6 +15,7 @@ class LoginViewModel: ObservableObject {
     @Published var userEmail = ""
     @Published var password = ""
     @Published var showError = false
+    @Published var userData: [String: Any]? = nil
 
     init() {
         // 必要に応じて、usernameやpasswordの初期値を設定
@@ -28,7 +29,6 @@ class LoginViewModel: ObservableObject {
             if let error = error {
                 // エラー処理 (例：アラート表示)
                 print("ログインエラー: \(error.localizedDescription)")
-                // ... エラーに応じた処理 ...
             } else {
                 // ログイン成功時の処理
                 if let user = authResult?.user {
@@ -37,23 +37,18 @@ class LoginViewModel: ObservableObject {
                     // ユーザーIDの取得
                     let userID = user.uid
 
-                    // Firestoreなどにユーザー情報を保存する場合
+                    // Firestoreからユーザー情報を取得
                     let db = Firestore.firestore()
-                    db.collection("users").document(userID).setData([
-                        "email": user.email ?? "",
-                        // その他のユーザー情報
-                    ]) { err in
-                        if let err = err {
-                            print("Firestoreへの保存エラー: \(err)")
+                    db.collection("users").document(userID).getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            // ユーザーデータの取得成功
+                            self.userData = document.data()
+                            print("Firestoreからの取得成功: \(self.userData ?? [:])") 
+
                         } else {
-                            print("Firestoreへの保存成功")
+                            print("Firestoreからの取得エラー: \(error?.localizedDescription ?? "不明なエラー")")
                         }
                     }
-
-                    // ログイン後の画面遷移
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-//                    self.navigationController?.pushViewController(mainViewController, animated: true)
                 }
             }
         }
