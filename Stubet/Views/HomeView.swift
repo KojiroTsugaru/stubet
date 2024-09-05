@@ -91,12 +91,12 @@ struct HomeView: View {
     // MARK: - Bet Section
     var betSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            if viewModel.newBets.count > 0 {
+            if viewModel.rewardPendingBets.count > 0 {
                 Text("報酬を受け取っていません！")
                     .font(.headline)
                     .padding(.leading)
                 
-                ForEach(viewModel.newBets) { bet in
+                ForEach(viewModel.rewardPendingBets) { bet in
                     NavigationLink(destination: BetDetailsView(bet: bet)) {
                         BetRowView(bet: bet, isNew: true)
                     }
@@ -170,7 +170,7 @@ struct HomeView_Previews: PreviewProvider {
         let viewModel = HomeViewModel(
             newMissions: dummyMissions,
             ongoingMissions: dummyMissions,
-            newBets: dummyBets,
+            rewardPendingBets: dummyBets,
             ongoingBets: dummyBets
         )
         
