@@ -8,7 +8,11 @@ import Foundation
 import SwiftUI
 
 struct SignupView: View {
-    @ObservedObject var viewModel: SignupViewModel // SignupViewModelを注入
+    @ObservedObject var viewModel: SignupViewModel
+    
+    init(){
+        self.viewModel = SignupViewModel()
+    }
 
     var body: some View {
         VStack {

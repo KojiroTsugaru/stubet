@@ -16,8 +16,6 @@ class LoginViewModel: ObservableObject {
     @Published var password = ""
     @Published var showError = false
 
-    private var cancellables = Set<AnyCancellable>()
-
     init() {
         // 必要に応じて、usernameやpasswordの初期値を設定
     }
