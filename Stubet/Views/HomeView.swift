@@ -61,11 +61,11 @@ struct HomeView: View {
                     .font(.headline)
                     .padding(.leading)
                 
-                
-                
                 ForEach(viewModel.newMissions) { mission in
-                    MissionRowView(mission: mission, isNew: true)
-                        .padding(.horizontal)
+                    NavigationLink(destination: MissionDetailsView(mission: mission)) {
+                        MissionRowView(mission: mission, isNew: true)
+                    }
+                    .padding(.horizontal)
                 }
             }
             
@@ -75,8 +75,10 @@ struct HomeView: View {
                     .padding(.leading)
                 
                 ForEach(viewModel.ongoingMissions) { mission in
-                    MissionRowView(mission: mission, isNew: false)
-                        .padding(.horizontal)
+                    NavigationLink(destination: MissionDetailsView(mission: mission)) {
+                        MissionRowView(mission: mission, isNew: false)
+                    }
+                    .padding(.horizontal)
                 }
             } else {
                 Text("進行中のミッションはありません")
@@ -108,8 +110,10 @@ struct HomeView: View {
                     .padding(.leading)
                 
                 ForEach(viewModel.ongoingBets) { bet in
-                    BetRowView(bet: bet, isNew: false)
-                        .padding(.horizontal)
+                    NavigationLink(destination: BetDetailsView(bet: bet)) {
+                        BetRowView(bet: bet, isNew: false)
+                    }
+                    .padding(.horizontal)
                 }
             } else {
                 Text("進行中ベットはありません")
