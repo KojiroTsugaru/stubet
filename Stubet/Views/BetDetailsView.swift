@@ -6,10 +6,27 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct BetDetailsView: View {
-
-    let bet: Bet
+    
+    let bet: Bet = Bet(id: "example_id", data: [
+        "title": "明日の一限遅刻したらラーメン奢りで！",
+        "description": "もし明日の一限に遅刻したら、ラーメンを奢ることになります。頑張って早起きしましょう！",
+        "deadline": Timestamp(date: dateFormatter.date(from: "09/02/2024 9:30 AM") ?? Date()),
+        "createdAt": Timestamp(date: Date()),
+        "updatedAt": Timestamp(date: Date()),
+        "senderId": "sender_id",
+        "receiverId": "receiver_id",
+        "status": "invitePending",
+//        "status": "inviteRejected",
+        "location": [
+            "name": "千葉大学 1号館",
+            "address": "",
+            "latitude": 0.0,
+            "longitude": 0.0
+        ]
+    ])
     
     var body: some View {
         ScrollView {
@@ -91,6 +108,35 @@ struct BetDetailsView: View {
                     .cornerRadius(10)
                 }
                 .padding()
+                
+                // Invite Response Buttons
+                                if bet.status == "invitePending" {
+//                if true {
+                    VStack(spacing: 10) {
+                        Button(action: {
+                            // 申請を受ける処理
+                        }) {
+                            Text("受ける")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.orange)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        
+                        Button(action: {
+                            // 申請を拒否する処理
+                        }) {
+                            Text("拒否する")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .padding()
+                }
                 
                 Spacer()
             }
