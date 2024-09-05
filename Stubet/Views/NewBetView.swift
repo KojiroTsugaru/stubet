@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct NewBetView: View {
-    @ObservedObject var viewModel = NewBetViewModel()
+    @ObservedObject var viewModel: SharedBetViewModel = SharedBetViewModel(currentUserId: "1")
+    
     @Environment(\.presentationMode) var presentationMode
     
+    
+    init() {
+        self.viewModel = SharedBetViewModel(currentUserId: "1")
+    }
     var body: some View {
         Form {
             // 友人を選択するセクション
@@ -34,7 +39,7 @@ struct NewBetView: View {
                     .frame(height: 100)
             }
         }
-//        .toolbar(.hidden, for: .tabBar)  // Hide tab bar
+        //        .toolbar(.hidden, for: .tabBar)  // Hide tab bar
         .navigationTitle("ベットを作成")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
@@ -46,10 +51,10 @@ struct NewBetView: View {
                     Text("戻る")
                 }
             },
-            trailing: NavigationLink(destination: TimeSettingView()) {
+            trailing: NavigationLink(destination: TimeSettingView(viewModel: self.viewModel)) {
                 Text("次へ")
             }
-                .disabled(!isFormValid)
+//                .disabled(!isFormValid)
         )
     }
     
@@ -86,7 +91,7 @@ struct CreateBetView_Previews: PreviewProvider {
         viewModel.description = "これはサンプルのベット内容です。友人と楽しく賭けましょう！"
         
         return NavigationView {
-            NewBetView(viewModel: viewModel)
+            NewBetView()
         }
     }
 }
