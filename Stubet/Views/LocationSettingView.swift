@@ -46,8 +46,15 @@ struct LocationSettingView: View {
             .padding(.vertical, 16)
         }
         .navigationBarTitle("場所を設定", displayMode: .inline)
+        //        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel)) {
+        //            Text("次へ")
+        //        }
         .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel)) {
-            Text("次へ")
+            Button(action: {
+                viewModel.locationName = self.locationName
+            }, label: {
+                Text("次へ")
+            })
         }
         )
     }

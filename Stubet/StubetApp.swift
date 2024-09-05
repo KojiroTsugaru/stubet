@@ -27,7 +27,7 @@ struct StubetApp: App {
         WindowGroup {
            ContentView()
                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            // SignupView()
+//             SignupView()
             // LoginView()
         }
     }

@@ -16,6 +16,7 @@ class SharedBetViewModel: ObservableObject {
     @Published var description: String = ""
     @Published var date: Date = Date()
     @Published var time: Date = Date()
+    @Published var locationName: String?
     @Published var friends: [Friend] = []
     
     
