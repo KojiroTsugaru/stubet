@@ -36,7 +36,7 @@ struct LoginView: View {
                 }
 
                 // ユーザー名入力フィールド
-                TextField("user name", text: $viewModel.userEmail)
+                TextField("Email", text: $viewModel.userEmail)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(8)
