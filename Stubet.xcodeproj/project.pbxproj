@@ -89,6 +89,7 @@
 		317581132C89642E00DD5B13 /* MissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsView.swift; sourceTree = "<group>"; };
 		317581152C896A7700DD5B13 /* NewBetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetViewModel.swift; sourceTree = "<group>"; };
 		317581172C896B2A00DD5B13 /* TimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingView.swift; sourceTree = "<group>"; };
+		317581252C89A57100DD5B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		311A57542C86D94A0040AA9A /* Stubet */ = {
 			isa = PBXGroup;
 			children = (
+				317581252C89A57100DD5B13 /* Info.plist */,
 				311A57842C86DFF00040AA9A /* Views */,
 				317580F42C86FE8F00DD5B13 /* ViewModels */,
 				311A57852C86E0FD0040AA9A /* Models */,
@@ -335,6 +337,8 @@
 			mainGroup = 311A57492C86D94A0040AA9A;
 			packageReferences = (
 				317581022C8731D400DD5B13 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				317581232C89A1E400DD5B13 /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
+				317581242C89A37500DD5B13 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
 			);
 			productRefGroup = 311A57532C86D94A0040AA9A /* Products */;
 			projectDirPath = "";
@@ -567,6 +571,7 @@
 				DEVELOPMENT_TEAM = 265P8798N4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Stubet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -601,6 +606,7 @@
 				DEVELOPMENT_TEAM = 265P8798N4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Stubet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -748,6 +754,22 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.1.0;
+			};
+		};
+		317581232C89A1E400DD5B13 /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/google-maps-ios-utils";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		317581242C89A37500DD5B13 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
