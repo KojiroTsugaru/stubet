@@ -32,7 +32,7 @@
 		317581102C88195D00DD5B13 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810F2C88195D00DD5B13 /* LocationModel.swift */; };
 		317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581112C89589D00DD5B13 /* BetDetailsView.swift */; };
 		317581142C89642E00DD5B13 /* MissionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581132C89642E00DD5B13 /* MissionDetailsView.swift */; };
-		317581162C896A7700DD5B13 /* NewBetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581152C896A7700DD5B13 /* NewBetViewModel.swift */; };
+		317581162C896A7700DD5B13 /* SharedBetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581152C896A7700DD5B13 /* SharedBetViewModel.swift */; };
 		317581182C896B2A00DD5B13 /* TimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581172C896B2A00DD5B13 /* TimeSettingView.swift */; };
 		3175811A2C89768A00DD5B13 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 317581192C89768A00DD5B13 /* FirebaseAnalyticsOnDeviceConversion */; };
 		3175811C2C89768A00DD5B13 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3175811B2C89768A00DD5B13 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -42,6 +42,8 @@
 		4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D902C880FB900543A57 /* LoginViewModel.swift */; };
 		4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8A2C8952690061921E /* SignupViewModel.swift */; };
 		4CEB9A8D2C8952930061921E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8C2C8952930061921E /* SignupView.swift */; };
+		67EF59F02C8987A60009757A /* TimeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EF59EF2C8987A60009757A /* TimeSettingViewModel.swift */; };
+		67EF59F22C8994010009757A /* LocationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EF59F12C8994010009757A /* LocationSettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,13 +89,15 @@
 		3175810F2C88195D00DD5B13 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		317581112C89589D00DD5B13 /* BetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetDetailsView.swift; sourceTree = "<group>"; };
 		317581132C89642E00DD5B13 /* MissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsView.swift; sourceTree = "<group>"; };
-		317581152C896A7700DD5B13 /* NewBetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetViewModel.swift; sourceTree = "<group>"; };
+		317581152C896A7700DD5B13 /* SharedBetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedBetViewModel.swift; sourceTree = "<group>"; };
 		317581172C896B2A00DD5B13 /* TimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingView.swift; sourceTree = "<group>"; };
 		317581252C89A57100DD5B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		4CEB9A8C2C8952930061921E /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		67EF59EF2C8987A60009757A /* TimeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingViewModel.swift; sourceTree = "<group>"; };
+		67EF59F12C8994010009757A /* LocationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +206,7 @@
 				317581112C89589D00DD5B13 /* BetDetailsView.swift */,
 				317581132C89642E00DD5B13 /* MissionDetailsView.swift */,
 				317581172C896B2A00DD5B13 /* TimeSettingView.swift */,
+				67EF59F12C8994010009757A /* LocationSettingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -224,7 +229,8 @@
 				317580F92C87014400DD5B13 /* HomeViewModel.swift */,
 				4C771D902C880FB900543A57 /* LoginViewModel.swift */,
 				4CEB9A8A2C8952690061921E /* SignupViewModel.swift */,
-				317581152C896A7700DD5B13 /* NewBetViewModel.swift */,
+				317581152C896A7700DD5B13 /* SharedBetViewModel.swift */,
+				67EF59EF2C8987A60009757A /* TimeSettingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -390,9 +396,10 @@
 				317581182C896B2A00DD5B13 /* TimeSettingView.swift in Sources */,
 				317581142C89642E00DD5B13 /* MissionDetailsView.swift in Sources */,
 				317580F62C86FF3600DD5B13 /* MissionModel.swift in Sources */,
+				67EF59F02C8987A60009757A /* TimeSettingViewModel.swift in Sources */,
 				317580FA2C87014400DD5B13 /* HomeViewModel.swift in Sources */,
 				311A57622C86D94D0040AA9A /* Stubet.xcdatamodeld in Sources */,
-				317581162C896A7700DD5B13 /* NewBetViewModel.swift in Sources */,
+				317581162C896A7700DD5B13 /* SharedBetViewModel.swift in Sources */,
 				3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */,
 				311A57872C86E6080040AA9A /* HomeView.swift in Sources */,
 				317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */,
@@ -403,6 +410,7 @@
 				3175810C2C88146500DD5B13 /* UserModel.swift in Sources */,
 				317581102C88195D00DD5B13 /* LocationModel.swift in Sources */,
 				311A57562C86D94A0040AA9A /* StubetApp.swift in Sources */,
+				67EF59F22C8994010009757A /* LocationSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
