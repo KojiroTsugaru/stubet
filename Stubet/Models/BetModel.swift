@@ -17,8 +17,9 @@ struct Bet: Identifiable {
     let updatedAt: Timestamp // Timestamp when the bet was last updated
     let senderId: String     // User ID of the person who created the bet
     let receiverId: String   // User ID of the person who receives the bet
-    let status: String       // Status of the bet (e.g., pending, rejected, etc.)
     let location: Location   // Location object (nested)
+    
+    let status: String       // invitePending, inviteRejected, inviteExpired, ongoing, rewardReceived, rewardPending, failed
 
     // Initialize from Firebase document data
     init(id: String, data: [String: Any]) {
