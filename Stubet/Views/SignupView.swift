@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignupView: View {
     @ObservedObject var viewModel: SignupViewModel
+    @Environment(\.presentationMode) var presentationMode // ログイン画面に戻るために追加
     
     init(){
         self.viewModel = SignupViewModel()
@@ -135,6 +136,15 @@ struct SignupView: View {
                     .frame(maxWidth: .infinity)
                     .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(8)
+            }
+            .padding()
+
+            // ログイン画面への案内とボタン
+            HStack {
+                Text("既にアカウントをお持ちですか？")
+                Button("ログイン") {
+                    presentationMode.wrappedValue.dismiss() // ログイン画面に戻る
+                }
             }
             .padding()
 
