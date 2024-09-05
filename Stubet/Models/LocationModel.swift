@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Location {
+struct Location: Identifiable {
+    let id: UUID = UUID() // 一意のIDを生成
     let name: String        // Name of the location
     let address: String     // Address of the location
     let latitude: Double    // Latitude of the location
