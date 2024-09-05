@@ -16,8 +16,6 @@ struct BetDetailsView: View {
         }
         .padding()
         .navigationBarHidden(false)  // Hide navigation bar
-        .toolbar(.hidden, for: .tabBar)  // Hide tab bar
-        
     }
 }
 

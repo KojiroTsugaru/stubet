@@ -10,7 +10,7 @@ import SwiftUI
 struct NewBetView: View {
     @ObservedObject var viewModel = NewBetViewModel()
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         Form {
             // 友人を選択するセクション
@@ -22,18 +22,19 @@ struct NewBetView: View {
                     }
                 }
             }
-
+            
             // タイトル入力セクション
             Section(header: Text("タイトル")) {
                 TextField("タイトル", text: $viewModel.title)
             }
-
+            
             // ベット内容入力セクション
             Section(header: Text("ベット内容")) {
                 TextEditor(text: $viewModel.description)
                     .frame(height: 100)
             }
         }
+//        .toolbar(.hidden, for: .tabBar)  // Hide tab bar
         .navigationTitle("ベットを作成")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
@@ -48,10 +49,10 @@ struct NewBetView: View {
             trailing: NavigationLink(destination: TimeSettingView()) {
                 Text("次へ")
             }
-            .disabled(!isFormValid)
+                .disabled(!isFormValid)
         )
     }
-
+    
     // フォームが有効かどうかの判定
     private var isFormValid: Bool {
         viewModel.selectedFriend != nil && !viewModel.title.isEmpty && !viewModel.description.isEmpty
@@ -77,13 +78,13 @@ struct CreateBetView_Previews: PreviewProvider {
                 "icon_url": "https://example.com/bob.jpg"
             ])
         ]
-
+        
         let viewModel = NewBetViewModel()
         viewModel.friends = sampleFriends
         viewModel.selectedFriend = sampleFriends.first
         viewModel.title = "サンプルベット"
         viewModel.description = "これはサンプルのベット内容です。友人と楽しく賭けましょう！"
-
+        
         return NavigationView {
             NewBetView(viewModel: viewModel)
         }
