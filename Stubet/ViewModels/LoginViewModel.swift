@@ -53,14 +53,5 @@ class LoginViewModel: ObservableObject {
             }
         }
         
-
-        // 例:
-        if userEmail == "userName" && password == "correct_password" {
-            // ログイン成功時の処理
-            showError = false
-        } else {
-            // ログイン失敗時の処理
-            showError = true
-        }
     }
 }

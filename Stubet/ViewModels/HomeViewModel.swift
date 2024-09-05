@@ -1,10 +1,3 @@
-//
-//  HomeViewModel.swift
-//  Stubet
-//
-//  Created by KJ on 9/3/24.
-//
-
 import Foundation
 import Combine
 import FirebaseFirestore
@@ -31,7 +24,8 @@ class HomeViewModel: ObservableObject {
     
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
-        self.currentUserId = "user890"
+        // UserProviderからcurrentUserIdを取得
+        self.currentUserId = UserProvider.shared.getCurrentUserId()
         if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
             // Fetch from Firebase only if no dummy data is provided
             fetchBets()
@@ -57,7 +51,7 @@ class HomeViewModel: ObservableObject {
                 let data = doc.data()
                 let bet = Bet(id: doc.documentID, data: data)
                 
-                // if receiverId is matched with current user's id, treat it as Mission
+                // If receiverId is matched with current user's id, treat it as Mission
                 if bet.receiverId == self.currentUserId {
                     let mission = Mission(from: bet)
                     self.allMissions.append(mission)
