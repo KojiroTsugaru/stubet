@@ -30,18 +30,19 @@ struct MissionRowView: View {
                     Image(systemName: "mappin.and.ellipse")
                     Text(mission.location.name)
                     Text("4.5 km")
+                    
+                    Spacer()
+                    
+                    // Profile Image
+                    Image("DummyProfileImage")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 30, height: 30)
+                        .clipShape(Circle())
                 }
                 .font(.caption)
                 .foregroundColor(isNew ? Color.white : Color.secondary)
             }
-            Spacer()
-            
-            // Profile Image
-            Image("DummyProfileImage")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
-                .clipShape(Circle())
         }
         .padding()
         .background(isNew ?
