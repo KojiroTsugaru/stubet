@@ -38,6 +38,11 @@
 		3175811C2C89768A00DD5B13 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 3175811B2C89768A00DD5B13 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		3175811E2C89768A00DD5B13 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 3175811D2C89768A00DD5B13 /* FirebaseAppCheck */; };
 		317581202C89768A00DD5B13 /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3175811F2C89768A00DD5B13 /* FirebaseAppDistribution-Beta */; };
+		31B8ED972C89BEC9004474B6 /* AddLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8ED962C89BEC9004474B6 /* AddLocationView.swift */; };
+		31B8ED992C89BF8C004474B6 /* MapSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8ED982C89BF8C004474B6 /* MapSearchBar.swift */; };
+		31B8ED9B2C89C070004474B6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8ED9A2C89C070004474B6 /* LocationManager.swift */; };
+		31B8ED9D2C89C0A1004474B6 /* AddLocaionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8ED9C2C89C0A1004474B6 /* AddLocaionViewModel.swift */; };
+		31B8ED9F2C89C200004474B6 /* IdentifiableCoordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B8ED9E2C89C200004474B6 /* IdentifiableCoordinate.swift */; };
 		4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D8E2C8809D000543A57 /* LoginView.swift */; };
 		4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D902C880FB900543A57 /* LoginViewModel.swift */; };
 		4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8A2C8952690061921E /* SignupViewModel.swift */; };
@@ -90,6 +95,11 @@
 		317581152C896A7700DD5B13 /* NewBetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetViewModel.swift; sourceTree = "<group>"; };
 		317581172C896B2A00DD5B13 /* TimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingView.swift; sourceTree = "<group>"; };
 		317581252C89A57100DD5B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		31B8ED962C89BEC9004474B6 /* AddLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationView.swift; sourceTree = "<group>"; };
+		31B8ED982C89BF8C004474B6 /* MapSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchBar.swift; sourceTree = "<group>"; };
+		31B8ED9A2C89C070004474B6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		31B8ED9C2C89C0A1004474B6 /* AddLocaionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocaionViewModel.swift; sourceTree = "<group>"; };
+		31B8ED9E2C89C200004474B6 /* IdentifiableCoordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableCoordinate.swift; sourceTree = "<group>"; };
 		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -202,6 +212,7 @@
 				317581112C89589D00DD5B13 /* BetDetailsView.swift */,
 				317581132C89642E00DD5B13 /* MissionDetailsView.swift */,
 				317581172C896B2A00DD5B13 /* TimeSettingView.swift */,
+				31B8ED962C89BEC9004474B6 /* AddLocationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +225,8 @@
 				3175810B2C88146500DD5B13 /* UserModel.swift */,
 				3175810D2C8816C900DD5B13 /* FriendModel.swift */,
 				3175810F2C88195D00DD5B13 /* LocationModel.swift */,
+				31B8ED9A2C89C070004474B6 /* LocationManager.swift */,
+				31B8ED9E2C89C200004474B6 /* IdentifiableCoordinate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +238,7 @@
 				4C771D902C880FB900543A57 /* LoginViewModel.swift */,
 				4CEB9A8A2C8952690061921E /* SignupViewModel.swift */,
 				317581152C896A7700DD5B13 /* NewBetViewModel.swift */,
+				31B8ED9C2C89C0A1004474B6 /* AddLocaionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -234,6 +248,7 @@
 			children = (
 				317580FB2C8701AC00DD5B13 /* MissionRowView.swift */,
 				317580FD2C8701C600DD5B13 /* BetRowView.swift */,
+				31B8ED982C89BF8C004474B6 /* MapSearchBar.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -382,7 +397,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CEB9A8D2C8952930061921E /* SignupView.swift in Sources */,
+				31B8ED9F2C89C200004474B6 /* IdentifiableCoordinate.swift in Sources */,
 				4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */,
+				31B8ED9B2C89C070004474B6 /* LocationManager.swift in Sources */,
+				31B8ED972C89BEC9004474B6 /* AddLocationView.swift in Sources */,
 				317580FC2C8701AC00DD5B13 /* MissionRowView.swift in Sources */,
 				311A575F2C86D94D0040AA9A /* Persistence.swift in Sources */,
 				3175810A2C880B9300DD5B13 /* NewBetView.swift in Sources */,
@@ -394,6 +412,8 @@
 				311A57622C86D94D0040AA9A /* Stubet.xcdatamodeld in Sources */,
 				317581162C896A7700DD5B13 /* NewBetViewModel.swift in Sources */,
 				3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */,
+				31B8ED992C89BF8C004474B6 /* MapSearchBar.swift in Sources */,
+				31B8ED9D2C89C0A1004474B6 /* AddLocaionViewModel.swift in Sources */,
 				311A57872C86E6080040AA9A /* HomeView.swift in Sources */,
 				317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */,
 				317580FE2C8701C600DD5B13 /* BetRowView.swift in Sources */,
