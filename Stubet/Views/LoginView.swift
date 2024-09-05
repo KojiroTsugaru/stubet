@@ -8,7 +8,11 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var viewModel: LoginViewModel // ViewModelを注入
+    @ObservedObject var viewModel: LoginViewModel
+    
+    init(){
+        self.viewModel = LoginViewModel()
+    }
 
     var body: some View {
         VStack {
@@ -37,7 +41,7 @@ struct LoginView: View {
             }
 
             // ユーザー名入力フィールド
-            TextField("user name", text: $viewModel.username) // viewModelとバインディング
+            TextField("user name", text: $viewModel.userEmail) // viewModelとバインディング
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(8)

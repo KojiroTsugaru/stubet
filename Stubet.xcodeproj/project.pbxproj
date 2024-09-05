@@ -36,6 +36,8 @@
 		317581182C896B2A00DD5B13 /* TimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581172C896B2A00DD5B13 /* TimeSettingView.swift */; };
 		4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D8E2C8809D000543A57 /* LoginView.swift */; };
 		4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D902C880FB900543A57 /* LoginViewModel.swift */; };
+		4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8A2C8952690061921E /* SignupViewModel.swift */; };
+		4CEB9A8D2C8952930061921E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8C2C8952930061921E /* SignupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,12 +81,14 @@
 		3175810B2C88146500DD5B13 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3175810D2C8816C900DD5B13 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		3175810F2C88195D00DD5B13 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		4CEB9A8C2C8952930061921E /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		317581112C89589D00DD5B13 /* BetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetDetailsView.swift; sourceTree = "<group>"; };
 		317581132C89642E00DD5B13 /* MissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsView.swift; sourceTree = "<group>"; };
 		317581152C896A7700DD5B13 /* NewBetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetViewModel.swift; sourceTree = "<group>"; };
 		317581172C896B2A00DD5B13 /* TimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingView.swift; sourceTree = "<group>"; };
-		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +188,7 @@
 				311A57862C86E6080040AA9A /* HomeView.swift */,
 				317581092C880B9300DD5B13 /* NewBetView.swift */,
 				4C771D8E2C8809D000543A57 /* LoginView.swift */,
+				4CEB9A8C2C8952930061921E /* SignupView.swift */,
 				317581112C89589D00DD5B13 /* BetDetailsView.swift */,
 				317581132C89642E00DD5B13 /* MissionDetailsView.swift */,
 				317581172C896B2A00DD5B13 /* TimeSettingView.swift */,
@@ -208,6 +213,7 @@
 			children = (
 				317580F92C87014400DD5B13 /* HomeViewModel.swift */,
 				4C771D902C880FB900543A57 /* LoginViewModel.swift */,
+				4CEB9A8A2C8952690061921E /* SignupViewModel.swift */,
 				317581152C896A7700DD5B13 /* NewBetViewModel.swift */,
 			);
 			path = ViewModels;
@@ -361,6 +367,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CEB9A8D2C8952930061921E /* SignupView.swift in Sources */,
+				4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */,
 				317580FC2C8701AC00DD5B13 /* MissionRowView.swift in Sources */,
 				311A575F2C86D94D0040AA9A /* Persistence.swift in Sources */,
 				3175810A2C880B9300DD5B13 /* NewBetView.swift in Sources */,
