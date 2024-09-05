@@ -7,14 +7,15 @@
 import SwiftUI
 import MapKit
 
-struct AddLocationView: View {
-    @StateObject private var viewModel = AddLocationViewModel()
+struct LocationSettingView: View {
+    @StateObject private var viewModel = LocationSettingViewModel()
     
-    @State var locationName = ""
+    @State private var locationName = ""
+    @State private var searchText: String = ""
     
     var body: some View {
         VStack {
-            MapSearchBar(text: $viewModel.searchText, onSearchButtonClicked: {
+            MapSearchBar(text: $searchText, onSearchButtonClicked: {
                 viewModel.searchForLocation()
             })
             
@@ -43,13 +44,17 @@ struct AddLocationView: View {
             }
             .padding(.vertical, 16)
         }
-        .navigationTitle("場所を設定")
+        .navigationBarTitle("場所を設定", displayMode: .inline)
+        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView()) {
+            Text("次へ")
+        }
+        )
     }
 }
 
 struct AddLocationView_Previews: PreviewProvider {
     static var previews: some View {
-        AddLocationView()
+        LocationSettingView()
     }
 }
 
@@ -57,5 +62,5 @@ struct AddLocationView_Previews: PreviewProvider {
 
 
 #Preview {
-    AddLocationView()
+    LocationSettingView()
 }

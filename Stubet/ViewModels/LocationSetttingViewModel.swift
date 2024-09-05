@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-class AddLocationViewModel: ObservableObject {
+class LocationSettingViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var selectedCoordinates: [IdentifiableCoordinate] = []
     @Published var region: MKCoordinateRegion
