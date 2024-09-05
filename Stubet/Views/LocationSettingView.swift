@@ -8,20 +8,21 @@ import SwiftUI
 import MapKit
 
 struct LocationSettingView: View {
-    @StateObject private var viewModel = LocationSettingViewModel()
+    @StateObject var viewModel: SharedBetViewModel
     
     @State private var locationName = ""
     @State private var searchText: String = ""
     
     var body: some View {
         VStack {
+            
             MapSearchBar(text: $searchText, onSearchButtonClicked: {
-                viewModel.searchForLocation()
+                viewModel.searchForLocation(searchText: searchText)
             })
             
             // Map View
             Map(coordinateRegion: $viewModel.region, interactionModes: .all, annotationItems: viewModel.selectedCoordinates) { coord in
-                MapMarker(coordinate: coord.coordinate)
+                MapPin(coordinate: coord.coordinate)
             }
             .cornerRadius(16)
             .onTapGesture {
@@ -45,22 +46,22 @@ struct LocationSettingView: View {
             .padding(.vertical, 16)
         }
         .navigationBarTitle("場所を設定", displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView()) {
+        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel)) {
             Text("次へ")
         }
         )
     }
 }
 
-struct AddLocationView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationSettingView()
-    }
-}
+//struct AddLocationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationSettingView()
+//    }
+//}
 
 
 
 
-#Preview {
-    LocationSettingView()
-}
+//#Preview {
+//    LocationSettingView()
+//}

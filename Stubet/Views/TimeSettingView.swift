@@ -50,7 +50,7 @@ struct TimeSettingView: View {
         }
         .padding()
         .navigationBarTitle("時間を設定", displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: LocationSettingView()) {
+        .navigationBarItems(trailing: NavigationLink(destination: LocationSettingView(viewModel: viewModel)) {
             Text("次へ")
         }
         )
