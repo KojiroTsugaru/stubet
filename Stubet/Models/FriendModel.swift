@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Friend: Identifiable {
+struct Friend: Identifiable , Hashable {
     let id: String
     let userName: String
     let displayName: String
@@ -20,4 +20,14 @@ struct Friend: Identifiable {
         self.displayName = data["displayName"] as? String ?? ""
         self.iconUrl = data["icon_url"] as? String ?? ""
     }
-}
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+
+        // MARK: - Equatable
+
+        static func == (lhs: Friend, rhs: Friend) -> Bool {
+            return lhs.id == rhs.id
+        }
+    }
+

@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var createBetViewModel = CreateBetViewModel(currentUserId: "1")
     
     var body: some View {
         VStack {
@@ -53,7 +54,7 @@ struct HomeView: View {
         .navigationTitle("ホーム")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(
-            trailing: NavigationLink(destination: NewBetView()) {
+            trailing: NavigationLink(destination: CreateBetView(viewModel : createBetViewModel)) {
                 Image(systemName: "plus")
                     .font(.title2)
             })
