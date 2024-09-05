@@ -17,20 +17,20 @@ struct BetRowView: View {
                 Text(bet.title)
                     .font(.headline)
                     .foregroundColor(isNew ? Color.white : Color.primary)
-                Text(bet.timeRemaining)
+                Text("16 時間")
                     .font(.subheadline)
                     .foregroundColor(isNew ? Color.white.opacity(0.7) : Color.secondary)
                 
                 HStack {
                     Image(systemName: "mappin.and.ellipse")
-                    Text(bet.location)
-                    Text(bet.distance)
+                    Text(bet.location.name)
+                    Text("1km")
                 }
                 .font(.caption)
                 .foregroundColor(isNew ? Color.white.opacity(0.7) : Color.secondary)
             }
             Spacer()
-            Image(bet.imageName)
+            Image("profileImage")
                 .resizable()
                 .frame(width: 40, height: 40)
                 .clipShape(Circle())
@@ -41,8 +41,3 @@ struct BetRowView: View {
         .shadow(radius: 1)
     }
 }
-
-
-//#Preview {
-//    BetRowView()
-//}
