@@ -14,7 +14,6 @@ struct MissionDetailsView: View {
             Text(mission.title)
         }.padding()
             .navigationBarHidden(false)  // Hide navigation bar
-            .toolbar(.hidden, for: .tabBar)  // Hide tab bar
     }
 }
 
