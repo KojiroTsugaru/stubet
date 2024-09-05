@@ -337,8 +337,6 @@
 			mainGroup = 311A57492C86D94A0040AA9A;
 			packageReferences = (
 				317581022C8731D400DD5B13 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				317581232C89A1E400DD5B13 /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */,
-				317581242C89A37500DD5B13 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
 			);
 			productRefGroup = 311A57532C86D94A0040AA9A /* Products */;
 			projectDirPath = "";
@@ -754,22 +752,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.1.0;
-			};
-		};
-		317581232C89A1E400DD5B13 /* XCRemoteSwiftPackageReference "google-maps-ios-utils" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googlemaps/google-maps-ios-utils";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		317581242C89A37500DD5B13 /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
