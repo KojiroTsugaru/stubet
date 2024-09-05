@@ -16,22 +16,37 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView {
-            TabView {
+        TabView {
+            //profile view
+            NavigationView{
                 HomeView()
-                    .tabItem {
-                        Image(systemName: "house")
-                        Text("ホーム")
-                    }
-                
-                HomeView()
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("プロフィール")
-                    }
+                    .navigationTitle("ホーム")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(
+                        trailing: NavigationLink(destination: NewBetView()) {
+                            Image(systemName: "plus")
+                                .font(.title2)
+                        })
+            }
+            .tabItem {
+                Image(systemName: "house")
+                Text("ホーム")
             }
             
-        }.accentColor(Color.orange)
+            // Profile view
+            NavigationView{
+                HomeView()
+                    .navigationTitle("プロフィール")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Image(systemName: "person.fill")
+                Text("プロフィール")
+            }
+            
+        }
+        
+        .accentColor(Color.orange)
     }
 }
 

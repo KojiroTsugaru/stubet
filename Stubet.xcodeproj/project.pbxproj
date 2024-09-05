@@ -30,6 +30,8 @@
 		3175810C2C88146500DD5B13 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810B2C88146500DD5B13 /* UserModel.swift */; };
 		3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810D2C8816C900DD5B13 /* FriendModel.swift */; };
 		317581102C88195D00DD5B13 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810F2C88195D00DD5B13 /* LocationModel.swift */; };
+		317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581112C89589D00DD5B13 /* BetDetailsView.swift */; };
+		317581142C89642E00DD5B13 /* MissionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581132C89642E00DD5B13 /* MissionDetailsView.swift */; };
 		4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D8E2C8809D000543A57 /* LoginView.swift */; };
 		4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D902C880FB900543A57 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -71,12 +73,14 @@
 		317580FB2C8701AC00DD5B13 /* MissionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionRowView.swift; sourceTree = "<group>"; };
 		317580FD2C8701C600DD5B13 /* BetRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetRowView.swift; sourceTree = "<group>"; };
 		317581002C87313900DD5B13 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		317581092C880B9300DD5B13 /* NewBetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetView.swift; sourceTree = "<group>"; };
 		3175810B2C88146500DD5B13 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3175810D2C8816C900DD5B13 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		3175810F2C88195D00DD5B13 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		317581112C89589D00DD5B13 /* BetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetDetailsView.swift; sourceTree = "<group>"; };
+		317581132C89642E00DD5B13 /* MissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsView.swift; sourceTree = "<group>"; };
+		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,8 @@
 				311A57862C86E6080040AA9A /* HomeView.swift */,
 				317581092C880B9300DD5B13 /* NewBetView.swift */,
 				4C771D8E2C8809D000543A57 /* LoginView.swift */,
+				317581112C89589D00DD5B13 /* BetDetailsView.swift */,
+				317581132C89642E00DD5B13 /* MissionDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,11 +359,13 @@
 				311A575F2C86D94D0040AA9A /* Persistence.swift in Sources */,
 				3175810A2C880B9300DD5B13 /* NewBetView.swift in Sources */,
 				311A57582C86D94A0040AA9A /* ContentView.swift in Sources */,
+				317581142C89642E00DD5B13 /* MissionDetailsView.swift in Sources */,
 				317580F62C86FF3600DD5B13 /* MissionModel.swift in Sources */,
 				317580FA2C87014400DD5B13 /* HomeViewModel.swift in Sources */,
 				311A57622C86D94D0040AA9A /* Stubet.xcdatamodeld in Sources */,
 				3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */,
 				311A57872C86E6080040AA9A /* HomeView.swift in Sources */,
+				317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */,
 				317580FE2C8701C600DD5B13 /* BetRowView.swift in Sources */,
 				4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */,
 				4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */,
