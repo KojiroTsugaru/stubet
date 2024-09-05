@@ -81,9 +81,14 @@ class SignupViewModel: ObservableObject {
                     if let user = authResult?.user {
                         let db = Firestore.firestore()
                         let userData: [String: Any] = [
-                            "username": self.username, // ユーザー名を追加
+                            "userName": self.username, // ユーザー名を追加
                             "email": user.email ?? "",
-                            "uid": user.uid
+                            "uid": user.uid,
+                            "iconUrl" : "",
+                            "displayName" : "",
+                            "createdAt" : Timestamp(date: Date()),
+                            "updatedAt" : Timestamp(date: Date()),
+                            "friends" : [],
                             // 必要に応じて他のフィールドを追加
                         ]
                         db.collection("users").document(user.uid).setData(userData) { error in

@@ -36,6 +36,7 @@
 		317581182C896B2A00DD5B13 /* TimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317581172C896B2A00DD5B13 /* TimeSettingView.swift */; };
 		4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D8E2C8809D000543A57 /* LoginView.swift */; };
 		4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C771D902C880FB900543A57 /* LoginViewModel.swift */; };
+		4CA5B7162C89C68300158688 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA5B7142C89C68300158688 /* UserProvider.swift */; };
 		4CEB9A8B2C8952690061921E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8A2C8952690061921E /* SignupViewModel.swift */; };
 		4CEB9A8D2C8952930061921E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB9A8C2C8952930061921E /* SignupView.swift */; };
 /* End PBXBuildFile section */
@@ -81,14 +82,15 @@
 		3175810B2C88146500DD5B13 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3175810D2C8816C900DD5B13 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		3175810F2C88195D00DD5B13 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
-		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
-		4CEB9A8C2C8952930061921E /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		317581112C89589D00DD5B13 /* BetDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetDetailsView.swift; sourceTree = "<group>"; };
 		317581132C89642E00DD5B13 /* MissionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionDetailsView.swift; sourceTree = "<group>"; };
 		317581152C896A7700DD5B13 /* NewBetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBetViewModel.swift; sourceTree = "<group>"; };
 		317581172C896B2A00DD5B13 /* TimeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSettingView.swift; sourceTree = "<group>"; };
+		4C771D8E2C8809D000543A57 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4C771D902C880FB900543A57 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		4CA5B7142C89C68300158688 /* UserProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
+		4CEB9A8A2C8952690061921E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		4CEB9A8C2C8952930061921E /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 		311A57542C86D94A0040AA9A /* Stubet */ = {
 			isa = PBXGroup;
 			children = (
+				4CA5B7152C89C68300158688 /* Providers */,
 				311A57842C86DFF00040AA9A /* Views */,
 				317580F42C86FE8F00DD5B13 /* ViewModels */,
 				311A57852C86E0FD0040AA9A /* Models */,
@@ -226,6 +229,14 @@
 				317580FD2C8701C600DD5B13 /* BetRowView.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		4CA5B7152C89C68300158688 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				4CA5B7142C89C68300158688 /* UserProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +395,7 @@
 				317581122C89589D00DD5B13 /* BetDetailsView.swift in Sources */,
 				317580FE2C8701C600DD5B13 /* BetRowView.swift in Sources */,
 				4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */,
+				4CA5B7162C89C68300158688 /* UserProvider.swift in Sources */,
 				4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */,
 				317580F82C8700E600DD5B13 /* BetModel.swift in Sources */,
 				3175810C2C88146500DD5B13 /* UserModel.swift in Sources */,

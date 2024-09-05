@@ -1,10 +1,3 @@
-//
-//  HomeViewModel.swift
-//  Stubet
-//
-//  Created by KJ on 9/3/24.
-//
-
 import Foundation
 import Combine
 import FirebaseFirestore
@@ -24,12 +17,12 @@ class HomeViewModel: ObservableObject {
     }
     
     private var db = Firestore.firestore()
-    private let currentUserId: String  // Pass the current logged-in user's ID
-    
-    
-    init(curretUserId: String = "1", newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
+    private var currentUserId: String?
+
+    init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          newBets: [Bet] = [], ongoingBets: [Bet] = []) {
-        self.currentUserId = curretUserId
+        // UserProviderからcurrentUserIdを取得
+        self.currentUserId = UserProvider.shared.getCurrentUserId()
         if newMissions.isEmpty && ongoingMissions.isEmpty && newBets.isEmpty && ongoingBets.isEmpty {
             // Fetch from Firebase only if no dummy data is provided
             fetchBets()
@@ -55,7 +48,7 @@ class HomeViewModel: ObservableObject {
                 let data = doc.data()
                 let bet = Bet(id: doc.documentID, data: data)
                 
-                // if receiverId is matched with current user's id, treat it as Mission
+                // If receiverId is matched with current user's id, treat it as Mission
                 if bet.receiverId == self.currentUserId {
                     let mission = Mission(from: bet)
                     self.newMissions.append(mission)
@@ -63,7 +56,6 @@ class HomeViewModel: ObservableObject {
                     self.newBets.append(bet)
                 }
             }
-            
             
             // Adjust logic accordingly
             self.ongoingBets = self.newBets
