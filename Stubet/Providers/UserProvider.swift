@@ -41,6 +41,10 @@ class UserProvider: ObservableObject {
         return currentUser?.id
     }
 
+    public func getUser() -> User? {
+        return currentUser
+    }
+
     // 外部からアクセス可能: ユーザー名を更新する
     public func updateUserName(_ newName: String) {
         guard let user = currentUser else { return }
