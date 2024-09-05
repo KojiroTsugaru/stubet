@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import FirebaseFirestore
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     @Published var allMissions: [Mission] = []
@@ -21,6 +22,9 @@ class HomeViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private let currentUserId: String  // Pass the current logged-in user's ID
     
+    // Use the locationManager as an EnvironmentObject
+    @EnvironmentObject var locationManager: UserLocationManager
+    
     
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
@@ -35,6 +39,9 @@ class HomeViewModel: ObservableObject {
             self.ongoingMissions = ongoingMissions
             self.rewardPendingBets = rewardPendingBets
             self.ongoingBets = ongoingBets
+            
+            // Add the ongoingMissions to the UserLocationManager
+            addOngoingMissionsToLocationManager()
         }
     }
     
@@ -79,6 +86,19 @@ class HomeViewModel: ObservableObject {
                 }
             }
             
+            // Add the ongoingMissions to the UserLocationManager
+            self.addOngoingMissionsToLocationManager()
         }
     }
+    
+    // Add locations from ongoingMissions to the UserLocationManager's targetLocations
+        private func addOngoingMissionsToLocationManager() {
+            for mission in ongoingMissions {
+                
+                let location = mission.location
+                
+                // Add each mission's location to the UserLocationManager
+                locationManager.addTargetLocation(location)
+            }
+        }
 }

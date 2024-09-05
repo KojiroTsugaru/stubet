@@ -16,7 +16,7 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
     @Published var nearestLocation: Location? // Store the nearest target location
     
     private var targetLocations: [Location] = [] // List of target locations with name, address, lat, long
-    let proximityThreshold: CLLocationDistance = 50 // Distance in meters to trigger the modal
+    let proximityThreshold: CLLocationDistance = 100 // Distance in meters to trigger the modal
 
     override init() {
         super.init()
@@ -151,6 +151,7 @@ struct LocationTestView: View {
             if isClose {
                 showingModal = true
             }
+            
         }
         .sheet(isPresented: $showingModal) {
             // The modal content

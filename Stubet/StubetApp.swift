@@ -23,14 +23,20 @@ struct StubetApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    @StateObject var locationManager = UserLocationManager()
+    
     var body: some Scene {
         WindowGroup {
             //           ContentView()
             //               .environment(\.managedObjectContext, persistenceController.container.viewContext)
             // SignupView()
             // LoginView()
-            LocationTestView()
-                .environmentObject(UserLocationManager()) // Inject real location manager in the live app
+//            LocationTestView()
+//                .environmentObject(locationManager) // Inject real location manager in the live app
+            NavigationView {
+                HomeView()
+                    .environmentObject(locationManager) // Inject real location manager in the live app
+            }
         }
     }
 }
