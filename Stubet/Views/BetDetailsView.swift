@@ -10,23 +10,31 @@ import FirebaseFirestore
 
 struct BetDetailsView: View {
     
-    let bet: Bet = Bet(id: "example_id", data: [
-        "title": "明日の一限遅刻したらラーメン奢りで！",
-        "description": "もし明日の一限に遅刻したら、ラーメンを奢ることになります。頑張って早起きしましょう！",
-        "deadline": Timestamp(date: dateFormatter.date(from: "09/02/2024 9:30 AM") ?? Date()),
-        "createdAt": Timestamp(date: Date()),
-        "updatedAt": Timestamp(date: Date()),
-        "senderId": "sender_id",
-        "receiverId": "receiver_id",
-        "status": "invitePending",
-//        "status": "inviteRejected",
-        "location": [
-            "name": "千葉大学 1号館",
-            "address": "",
-            "latitude": 0.0,
-            "longitude": 0.0
-        ]
-    ])
+    let bet: Bet
+    
+    init() {
+        self.bet = Bet(id: "example_id", data: [
+            "title": "明日の一限遅刻したらラーメン奢りで！",
+            "description": "もし明日の一限に遅刻したら、ラーメンを奢ることになります。頑張って早起きしましょう！",
+            "deadline": Timestamp(date: dateFormatter.date(from: "09/02/2024 9:30 AM") ?? Date()),
+            "createdAt": Timestamp(date: Date()),
+            "updatedAt": Timestamp(date: Date()),
+            "senderId": "sender_id",
+            "receiverId": "receiver_id",
+            "status": "invitePending",
+    //        "status": "inviteRejected",
+            "location": [
+                "name": "千葉大学 1号館",
+                "address": "",
+                "latitude": 0.0,
+                "longitude": 0.0
+            ]
+        ])
+    }
+    
+    init (bet: Bet) {
+        self.bet = bet
+    }
     
     var body: some View {
         ScrollView {
