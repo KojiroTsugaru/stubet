@@ -27,16 +27,17 @@ struct StubetApp: App {
     
     var body: some Scene {
         WindowGroup {
-            //           ContentView()
-            //               .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            // SignupView()
-            // LoginView()
+           ContentView()
+               .environment(\.managedObjectContext, persistenceController.container.viewContext)
+               .environmentObject(locationManager)
+//             SignupView()
+//             LoginView()
 //            LocationTestView()
 //                .environmentObject(locationManager) // Inject real location manager in the live app
-            NavigationView {
-                HomeView()
-                    .environmentObject(locationManager) // Inject real location manager in the live app
-            }
+//            NavigationView {
+//                HomeView()
+//                    .environmentObject(locationManager) // Inject real location manager in the live app
+//            }
         }
     }
 }

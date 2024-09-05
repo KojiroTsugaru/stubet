@@ -108,7 +108,7 @@ class HomeViewModel: ObservableObject {
             ongoingMissions[index].status = newStatus
             
             // You can also update the Firestore document if necessary
-            db.collection("missions").document(mission.id).updateData([
+            db.collection("bets").document(mission.id).updateData([
                 "status": newStatus
             ]) { error in
                 if let error = error {
