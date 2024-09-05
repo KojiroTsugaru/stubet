@@ -3,10 +3,12 @@ import Combine
 import FirebaseFirestore
 
 class HomeViewModel: ObservableObject {
+    @Published var allMissions: [Mission] = []
+    @Published var allBets: [Bet] = []
     @Published var newMissions: [Mission] = []
     @Published var ongoingMissions: [Mission] = []
     
-    @Published var newBets: [Bet] = []
+    @Published var rewardPendingBets: [Bet] = []
     @Published var ongoingBets: [Bet] = []
     
     @Published var selectedTab: Tab = .mission
@@ -17,6 +19,13 @@ class HomeViewModel: ObservableObject {
     }
     
     private var db = Firestore.firestore()
+    private let currentUserId: String  // Pass the current logged-in user's ID
+    
+    
+    init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
+         rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
+        self.currentUserId = "user890"
+        if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
     private var currentUserId: String?
 
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
@@ -30,7 +39,7 @@ class HomeViewModel: ObservableObject {
             // Use dummy data if provided
             self.newMissions = newMissions
             self.ongoingMissions = ongoingMissions
-            self.newBets = newBets
+            self.rewardPendingBets = rewardPendingBets
             self.ongoingBets = ongoingBets
         }
     }
@@ -51,15 +60,31 @@ class HomeViewModel: ObservableObject {
                 // If receiverId is matched with current user's id, treat it as Mission
                 if bet.receiverId == self.currentUserId {
                     let mission = Mission(from: bet)
-                    self.newMissions.append(mission)
+                    self.allMissions.append(mission)
                 } else {
-                    self.newBets.append(bet)
+                    self.allBets.append(bet)
                 }
             }
             
-            // Adjust logic accordingly
-            self.ongoingBets = self.newBets
-            self.ongoingMissions = self.newMissions
+            // Assign bets and missions based on status
+            // For Bets
+            for bet in self.allBets {
+                if bet.status == "ongoing" {
+                    self.ongoingBets.append(bet)
+                } else if bet.status == "rewardPending" {
+                    self.rewardPendingBets.append(bet)
+                }
+            }
+            
+            // For Missions
+            for mission in self.allMissions {
+                if mission.status == "ongoing" {
+                    self.ongoingMissions.append(mission)
+                } else if mission.status == "invitePending" {
+                    self.newMissions.append(mission)
+                }
+            }
+            
         }
     }
 }
