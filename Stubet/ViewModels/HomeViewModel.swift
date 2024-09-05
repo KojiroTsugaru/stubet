@@ -31,7 +31,7 @@ class HomeViewModel: ObservableObject {
     
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
-        self.currentUserId = "1"
+        self.currentUserId = "user890"
         if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
             // Fetch from Firebase only if no dummy data is provided
             fetchBets()
