@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import FirebaseFirestore
+import SwiftUI
 
 class HomeViewModel: ObservableObject {
     @Published var allMissions: [Mission] = []
@@ -21,11 +22,14 @@ class HomeViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private let currentUserId: String  // Pass the current logged-in user's ID
     
+    // Use the locationManager as an EnvironmentObject
+    @EnvironmentObject var locationManager: UserLocationManager
+    
     
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
         // UserProviderからcurrentUserIdを取得
-        self.currentUserId = UserProvider.shared.getCurrentUserId()
+        self.currentUserId = UserProvider.shared.getCurrentUserId() ?? "1"
         if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
             // Fetch from Firebase only if no dummy data is provided
             fetchBets()
@@ -35,6 +39,9 @@ class HomeViewModel: ObservableObject {
             self.ongoingMissions = ongoingMissions
             self.rewardPendingBets = rewardPendingBets
             self.ongoingBets = ongoingBets
+            
+            // Add the ongoingMissions to the UserLocationManager
+            addOngoingMissionsToLocationManager()
         }
     }
     
@@ -79,6 +86,37 @@ class HomeViewModel: ObservableObject {
                 }
             }
             
+            // Add the ongoingMissions to the UserLocationManager
+            self.addOngoingMissionsToLocationManager()
+        }
+    }
+    
+    // Add locations from ongoingMissions to the UserLocationManager's targetLocations
+    private func addOngoingMissionsToLocationManager() {
+        for mission in ongoingMissions {
+            
+            let location = mission.location
+            
+            // Add each mission's location to the UserLocationManager
+            locationManager.addTargetLocation(location)
+        }
+    }
+    
+    func updateMissionStatus(mission: Mission, newStatus: String) {
+        // Find the mission in the ongoingMissions array and update its status
+        if let index = ongoingMissions.firstIndex(where: { $0.id == mission.id }) {
+            ongoingMissions[index].status = newStatus
+            
+            // You can also update the Firestore document if necessary
+            db.collection("bets").document(mission.id).updateData([
+                "status": newStatus
+            ]) { error in
+                if let error = error {
+                    print("Error updating mission status: \(error)")
+                } else {
+                    print("Mission status updated successfully")
+                }
+            }
         }
     }
 }

@@ -26,6 +26,8 @@ class SharedBetViewModel: ObservableObject {
 
     private var db = Firestore.firestore()
     private let currentUserId: String
+    
+    private var locationManager = MapLocationManager()
 
     init(currentUserId: String = "1") {
         self.currentUserId = currentUserId
@@ -47,8 +49,6 @@ class SharedBetViewModel: ObservableObject {
             self?.friends = documents.compactMap { Friend(id: $0.documentID, data: $0.data()) }
         }
     }
-    
-    private var locationManager = LocationManager()
     
     private func bindLocationUpdates() {
         locationManager.$region.assign(to: &$region)

@@ -9,7 +9,19 @@ import SwiftUI
 import FirebaseFirestore
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel: HomeViewModel
+    
+    // Use the locationManager as an EnvironmentObject
+    @EnvironmentObject var locationManager: UserLocationManager
+    
+    @State private var showingModal = false
+    
+    // Track the nearest mission location to the user gets close to
+    @State private var nearestMission: Mission?
+    
+    init() {
+        self.viewModel = HomeViewModel()
+    }
     
     var body: some View {
         VStack {
@@ -52,6 +64,51 @@ struct HomeView: View {
         }
         .background(Color(UIColor.systemGroupedBackground))
         .edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+            // Start updating the location when the view appears
+            locationManager.startUpdatingLocation()
+        }
+        .onDisappear {
+            // Optionally stop location updates when the view disappears
+            locationManager.stopUpdatingLocation()
+        }
+        .onChange(of: locationManager.isCloseToAnyTarget) { isClose in
+            // Show the modal when the user is close to any target location
+            if isClose {
+                if let targetLocation = locationManager.nearestLocation {
+                    // Find the mission corresponding to the location
+                    nearestMission = viewModel.ongoingMissions.first(where: { $0.location.name == targetLocation.name })
+                    showingModal = true
+                }
+            }
+        }
+        .sheet(isPresented: $showingModal) {
+            // The modal content
+            VStack {
+                if let target = locationManager.nearestLocation {
+                    Text("You are close to \(target.name)!")
+                        .font(.title)
+                        .padding()
+                    Text("Address: \(target.address)")
+                    Text("Latitude: \(target.latitude)")
+                    Text("Longitude: \(target.longitude)")
+                } else {
+                    Text("You are close to a target location!")
+                        .font(.title)
+                        .padding()
+                }
+                Button("Dismiss and Update Status") {
+                    if let missionToUpdate = nearestMission {
+                        // Change the status of the mission to "rewardPending"
+                        viewModel.updateMissionStatus(mission: missionToUpdate, newStatus: "rewardPending")
+                        locationManager.removeTargetLocation(missionToUpdate.location.name)
+                    }
+
+                    nearestMission = nil
+                    showingModal = false
+                }
+            }
+        }
     }
     
     var missionSection: some View {
@@ -174,7 +231,7 @@ struct HomeView_Previews: PreviewProvider {
             ongoingBets: dummyBets
         )
         
-        return HomeView(viewModel: viewModel)
+        return HomeView()
     }
 }
 
