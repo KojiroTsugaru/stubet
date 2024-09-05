@@ -29,9 +29,11 @@
 		3175810C2C88146500DD5B13 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810B2C88146500DD5B13 /* UserModel.swift */; };
 		3175810E2C8816C900DD5B13 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810D2C8816C900DD5B13 /* FriendModel.swift */; };
 		317581102C88195D00DD5B13 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3175810F2C88195D00DD5B13 /* LocationModel.swift */; };
+
 		67683EB42C88614000DEC096 /* CreateBetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67683EB32C88614000DEC096 /* CreateBetView.swift */; };
 		67683EB62C88615B00DEC096 /* CreateBetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67683EB52C88615B00DEC096 /* CreateBetViewModel.swift */; };
 		67683EB82C89528400DEC096 /* TimeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67683EB72C89528400DEC096 /* TimeSettingView.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				317580FF2C8701E000DD5B13 /* Common */,
-				311A57862C86E6080040AA9A /* HomeView.swift */,
+				311A57862C86E6080040AA9A /* HomeView.swift */
 				67683EB32C88614000DEC096 /* CreateBetView.swift */,
 				67683EB72C89528400DEC096 /* TimeSettingView.swift */,
 			);
@@ -359,6 +361,8 @@
 				311A57872C86E6080040AA9A /* HomeView.swift in Sources */,
 				67683EB82C89528400DEC096 /* TimeSettingView.swift in Sources */,
 				317580FE2C8701C600DD5B13 /* BetRowView.swift in Sources */,
+				4C771D912C880FB900543A57 /* LoginViewModel.swift in Sources */,
+				4C771D8F2C8809D000543A57 /* LoginView.swift in Sources */,
 				317580F82C8700E600DD5B13 /* BetModel.swift in Sources */,
 				3175810C2C88146500DD5B13 /* UserModel.swift in Sources */,
 				317581102C88195D00DD5B13 /* LocationModel.swift in Sources */,
