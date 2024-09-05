@@ -10,11 +10,24 @@ import FirebaseFirestore
 
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
             // Tab Switching: ミッション and ペット buttons
             HStack {
+                
+                // Logout button
+                Button(action: {
+                    viewModel.logout()
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                        .foregroundColor(.gray)
+                        .font(.system(size: 20))
+                }
+                .padding(.leading)
+                
                 Spacer()
                 Button(action: {
                     viewModel.selectedTab = .mission

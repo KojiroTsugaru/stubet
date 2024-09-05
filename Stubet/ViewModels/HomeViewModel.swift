@@ -81,4 +81,11 @@ class HomeViewModel: ObservableObject {
             
         }
     }
+    
+    func logout(){
+     
+        UserProvider.shared.signOutFirebaseUser()
+        
+    }
+    
 }

@@ -151,5 +151,6 @@ struct SignupView: View {
             Spacer() // 下部にスペースを作るために追加
         }
         .padding()
+        .navigationBarTitle("新規登録", displayMode: .inline)
     }
 }

@@ -127,7 +127,7 @@ class UserProvider: ObservableObject {
         print("ローカルのFirebase関連キーが削除されました。")
     }
 
-    private func signOutFirebaseUser() {
+    public func signOutFirebaseUser() {
         do {
             try Auth.auth().signOut()
             print("ユーザーがサインアウトされました。")

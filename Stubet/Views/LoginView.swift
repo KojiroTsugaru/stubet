@@ -74,7 +74,7 @@ struct LoginView: View {
                 // サインアップへの案内とボタン
                 HStack {
                     Text("アカウントをお持ちでないですか？")
-                    NavigationLink(destination: SignupView()) { // SignupViewへの遷移を設定
+                    NavigationLink(destination: SignupView(), isActive: $isShowingSignupView) {
                         Button("新規登録") {
                             isShowingSignupView = true
                         }

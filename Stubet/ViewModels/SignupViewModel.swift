@@ -24,6 +24,8 @@ class SignupViewModel: ObservableObject {
     @Published var emailError: String = ""
     @Published var passwordError: String = ""
     @Published var confirmPasswordError: String = ""
+    
+    var onSignupSuccess: (() -> Void)?
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -102,10 +104,15 @@ class SignupViewModel: ObservableObject {
 
                     print("User signed up successfully: \(authResult?.user.email ?? "")")
 
+                    
                     // ログイン処理を完了させる（必要に応じて実装を調整）
                     // 例: ログイン状態を管理するフラグを更新する、ユーザー情報を保存するなど
 
                     // ホーム画面に遷移
+                    DispatchQueue.main.async {
+                        self.onSignupSuccess?()
+                    }
+                    
                 }
             }
         } else {
