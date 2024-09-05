@@ -58,7 +58,6 @@ struct ContentView: View {
 //                        Text("プロフィール")
 //                    }
             }
-            .accentColor(Color.orange)
-        }
+        }.accentColor(Color.orange)
     }
 }
