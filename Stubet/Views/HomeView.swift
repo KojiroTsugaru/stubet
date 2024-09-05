@@ -9,15 +9,19 @@ import SwiftUI
 import FirebaseFirestore
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel: HomeViewModel
     
     // Use the locationManager as an EnvironmentObject
     @EnvironmentObject var locationManager: UserLocationManager
     
     @State private var showingModal = false
     
-    // Track the nearest target location the user gets close to
-    @State private var nearestLocation: Location?
+    // Track the nearest mission location to the user gets close to
+    @State private var nearestMission: Mission?
+    
+    init() {
+        self.viewModel = HomeViewModel()
+    }
     
     var body: some View {
         VStack {
@@ -69,11 +73,13 @@ struct HomeView: View {
             locationManager.stopUpdatingLocation()
         }
         .onChange(of: locationManager.isCloseToAnyTarget) { isClose in
-            
             // Show the modal when the user is close to any target location
-            if isClose, let target = locationManager.nearestLocation {
-                nearestLocation = target // Keep track of the nearest location
-                showingModal = true
+            if isClose {
+                if let targetLocation = locationManager.nearestLocation {
+                    // Find the mission corresponding to the location
+                    nearestMission = viewModel.ongoingMissions.first(where: { $0.location.name == targetLocation.name })
+                    showingModal = true
+                }
             }
         }
         .sheet(isPresented: $showingModal) {
@@ -91,12 +97,14 @@ struct HomeView: View {
                         .font(.title)
                         .padding()
                 }
-                Button("Dismiss") {
-                    if let targetToRemove = nearestLocation {
-                        locationManager.removeTargetLocation(targetToRemove.name)
+                Button("Dismiss and Update Status") {
+                    if let missionToUpdate = nearestMission {
+                        // Change the status of the mission to "rewardPending"
+                        viewModel.updateMissionStatus(mission: missionToUpdate, newStatus: "rewardPending")
+                        locationManager.removeTargetLocation(missionToUpdate.location.name)
                     }
-                    
-                    nearestLocation = nil // Reset the tracked location
+
+                    nearestMission = nil
                     showingModal = false
                 }
             }
@@ -223,7 +231,7 @@ struct HomeView_Previews: PreviewProvider {
             ongoingBets: dummyBets
         )
         
-        return HomeView(viewModel: viewModel)
+        return HomeView()
     }
 }
 

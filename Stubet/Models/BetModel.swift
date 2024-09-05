@@ -19,7 +19,7 @@ struct Bet: Identifiable {
     let receiverId: String   // User ID of the person who receives the bet
     let location: Location   // Location object (nested)
     
-    let status: String       // invitePending, inviteRejected, inviteExpired, ongoing, rewardReceived, rewardPending, failed
+    var status: String       // invitePending, inviteRejected, inviteExpired, ongoing, rewardReceived, rewardPending, failed
 
     // Initialize from Firebase document data
     init(id: String, data: [String: Any]) {

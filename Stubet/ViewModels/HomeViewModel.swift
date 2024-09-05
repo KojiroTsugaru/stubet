@@ -92,13 +92,31 @@ class HomeViewModel: ObservableObject {
     }
     
     // Add locations from ongoingMissions to the UserLocationManager's targetLocations
-        private func addOngoingMissionsToLocationManager() {
-            for mission in ongoingMissions {
-                
-                let location = mission.location
-                
-                // Add each mission's location to the UserLocationManager
-                locationManager.addTargetLocation(location)
+    private func addOngoingMissionsToLocationManager() {
+        for mission in ongoingMissions {
+            
+            let location = mission.location
+            
+            // Add each mission's location to the UserLocationManager
+            locationManager.addTargetLocation(location)
+        }
+    }
+    
+    func updateMissionStatus(mission: Mission, newStatus: String) {
+        // Find the mission in the ongoingMissions array and update its status
+        if let index = ongoingMissions.firstIndex(where: { $0.id == mission.id }) {
+            ongoingMissions[index].status = newStatus
+            
+            // You can also update the Firestore document if necessary
+            db.collection("missions").document(mission.id).updateData([
+                "status": newStatus
+            ]) { error in
+                if let error = error {
+                    print("Error updating mission status: \(error)")
+                } else {
+                    print("Mission status updated successfully")
+                }
             }
         }
+    }
 }
