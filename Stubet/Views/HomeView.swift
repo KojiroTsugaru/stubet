@@ -9,9 +9,65 @@ import SwiftUI
 import FirebaseFirestore
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    // Function to listen to the bets collection in Firestore
+    private func listenToBetCollection() {
+        listener = db.collection("bets").addSnapshotListener { snapshot, error in
+            guard let snapshot = snapshot else {
+                print("Error fetching snapshot: \(error!)")
+                return
+            }
+            
+            var updatedBets: [Bet] = []
+            
+            snapshot.documentChanges.forEach { diff in
+                let data = diff.document.data()
+                let betId = diff.document.documentID
+                let bet = Bet(id: betId, data: data)
+                
+                // Check if the change is a modification and if the status field changed
+                if diff.type == .modified {
+                    if let index = bets.firstIndex(where: { $0.id == betId }) {
+                        let previousBet = bets[index]
+                        if previousBet.status != bet.status {
+                            // Show modal if status has changed
+                            changedBet = bet
+                            showModal = true
+                        }
+                    }
+                }
+                
+                // Update the bet list regardless of the change type
+                updatedBets.append(bet)
+            }
+            
+            // Update the local bets list
+            bets = updatedBets
+        }
+    }
+    
     @State private var navigationPath = NavigationPath()
-
+    
+    @ObservedObject var viewModel: HomeViewModel
+    
+    // Use the locationManager as an EnvironmentObject
+    @EnvironmentObject var locationManager: UserLocationManager
+    
+    @State private var showingModal = false
+    
+    // Track the nearest mission location to the user gets close to
+    @State private var nearestMission: Mission?
+    
+    @State private var bets: [Bet] = []
+    @State private var showModal: Bool = false
+    @State private var changedBet: Bet? // Track which bet changed
+    
+    private var db = Firestore.firestore()
+    @State private var listener: ListenerRegistration?
+    
+    init() {
+        self.viewModel = HomeViewModel()
+    }
+    
     var body: some View {
         NavigationStack(path: $navigationPath) {
             VStack {
@@ -54,6 +110,70 @@ struct HomeView: View {
             }
             .background(Color(UIColor.systemGroupedBackground))
             .edgesIgnoringSafeArea(.bottom)
+            .onAppear {
+                listenToBetCollection()
+                // Start updating the location when the view appears
+                locationManager.startUpdatingLocation()
+            }
+            .onDisappear {
+                listener?.remove() // Clean up the listener when the view disappears
+                // Optionally stop location updates when the view disappears
+                locationManager.stopUpdatingLocation()
+            }
+            .onChange(of: locationManager.isCloseToAnyTarget) { isClose in
+                // Show the modal when the user is close to any target location
+                if isClose {
+                    if let targetLocation = locationManager.nearestLocation {
+                        // Find the mission corresponding to the location
+                        nearestMission = viewModel.ongoingMissions.first(where: { $0.location.name == targetLocation.name })
+                        showingModal = true
+                    }
+                }
+            }
+            //自分がミッションクリアモーダル
+            .sheet(isPresented: $showingModal) {
+                // The modal content
+                VStack {
+                    if let target = locationManager.nearestLocation {
+                        VStack(spacing: 2) {
+                            Text("ミッションをクリアしました!")
+                                .font(.title)
+                                .padding()
+                            Text("ミッション \(target.name)!")
+                            Text("Address: \(target.address)")
+                        }.background(Color.orange)
+                    } else {
+                        Text("ミッションをクリアしました!")
+                            .font(.title)
+                            .padding()
+                    }
+                    Button("閉じる") {
+                        if let missionToUpdate = nearestMission {
+                            // Change the status of the mission to "rewardPending"
+                            viewModel.updateMissionStatus(mission: missionToUpdate, newStatus: "rewardPending")
+                            locationManager.removeTargetLocation(missionToUpdate.location.name)
+                        }
+                        
+                        nearestMission = nil
+                        showingModal = false
+                    }
+                }
+            }
+            //            ミッションをクリアされた場合のモーダル
+            .sheet(isPresented: $showModal) {
+                if let changedBet = changedBet {
+                    VStack {
+                        Text("Status Changed!")
+                            .font(.largeTitle)
+                        Text("Bet: \(changedBet.title)")
+                        Text("New Status: \(changedBet.status)")
+                        Button("Dismiss") {
+                            showModal = false
+                        }
+                    }
+                }
+            }
+            
             .navigationBarItems(
                 trailing: NavigationLink(destination: NewBetView(navigationPath: $navigationPath)) {
                     Image(systemName: "plus")
@@ -62,7 +182,7 @@ struct HomeView: View {
             )
         }.accentColor(.orange)
     }
-
+    
     
     var missionSection: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -131,63 +251,7 @@ struct HomeView: View {
                     .offset(y: 250)
             }
         }
+        
     }
-}
-
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Dummy location data
-        let dummyLocation = Location(data: [
-            "name": "Location 1",
-            "address": "123 Street, City",
-            "latitude": 35.6586,
-            "longitude": 139.7454
-        ])
-        
-        // Dummy bets
-        let dummyBets = [
-            Bet(id: "1", data: [
-                "title": "Dummy Bet 1",
-                "description": "Description for bet 1",
-                "deadline": Timestamp(date: Date().addingTimeInterval(3600)),
-                "createdAt": Timestamp(date: Date()),
-                "updatedAt": Timestamp(date: Date()),
-                "senderId": "user1",
-                "receiverId": "user2",
-                "status": "pending",
-                "location": dummyLocation
-            ]),
-            Bet(id: "2", data: [
-                "title": "Dummy Bet 2",
-                "description": "Description for bet 2",
-                "deadline": Timestamp(date: Date().addingTimeInterval(7200)),
-                "createdAt": Timestamp(date: Date()),
-                "updatedAt": Timestamp(date: Date()),
-                "senderId": "user2",
-                "receiverId": "user3",
-                "status": "ongoing",
-                "location": dummyLocation
-            ])
-        ]
-        
-        // Dummy missions (wrapping the bets)
-        let dummyMissions = dummyBets.map { bet -> Mission in
-            return Mission(from: bet)
-        }
-        
-        // Initialize HomeViewModel with dummy data
-        let viewModel = HomeViewModel(
-            newMissions: dummyMissions,
-            ongoingMissions: dummyMissions,
-            rewardPendingBets: dummyBets,
-            ongoingBets: dummyBets
-        )
-        
-        return HomeView(viewModel: viewModel)
-    }
-}
-
-#Preview {
-    HomeView_Previews.previews
+    
 }

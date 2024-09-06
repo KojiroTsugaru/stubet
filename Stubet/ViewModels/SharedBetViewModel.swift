@@ -49,7 +49,7 @@ class SharedBetViewModel: ObservableObject {
         }
     }
     
-    private var locationManager = LocationManager()
+    private var locationManager = MapLocationManager()
     
     private func bindLocationUpdates() {
         locationManager.$region.assign(to: &$region)

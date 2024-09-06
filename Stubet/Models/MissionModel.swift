@@ -14,7 +14,7 @@ struct Mission: Identifiable {
     let description: String
     let deadline: Timestamp
     let location: Location
-    let status: String
+    var status: String
 
     init(from bet: Bet) {
         self.id = bet.id

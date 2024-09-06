@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class MapLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var region: MKCoordinateRegion
     
     private let locationManager = CLLocationManager()

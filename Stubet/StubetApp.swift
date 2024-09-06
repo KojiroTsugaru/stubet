@@ -22,12 +22,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct StubetApp: App {
     let persistenceController = PersistenceController.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
+    @StateObject var locationManager = UserLocationManager()
 
     var body: some Scene {
         WindowGroup {
 //           ContentView()
 //               .environment(\.managedObjectContext, persistenceController.container.viewContext)
             HomeView()
+                .environmentObject(locationManager)
             // SignupView()
             // LoginView()
         }
