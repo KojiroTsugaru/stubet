@@ -78,12 +78,12 @@ struct HomeView: View {
             .onAppear {
 //                listenToBetCollection()
                 // Start updating the location when the view appears
-                locationManager.startUpdatingLocation()
+//                locationManager.startUpdatingLocation()
             }
             .onDisappear {
 //                listener?.remove() // Clean up the listener when the view disappears
                 // Optionally stop location updates when the view disappears
-                locationManager.stopUpdatingLocation()
+//                locationManager.stopUpdatingLocation()
             }
             .onChange(of: locationManager.isCloseToAnyTarget) { isClose in
                 // Show the modal when the user is close to any target location
