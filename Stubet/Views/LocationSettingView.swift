@@ -1,31 +1,27 @@
-//
-//  AddLocaionView.swift
-//  Stubet
-//
-//  Created by KJ on 9/5/24.
-//
 import SwiftUI
 import MapKit
 
 struct LocationSettingView: View {
     @StateObject var viewModel: SharedBetViewModel
-    @Binding var navigationPath: NavigationPath
-    
     @State private var locationName = ""
     @State private var searchText: String = ""
+    @Binding var showNewBet: Bool // Accept showNewBet as a Binding
     
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
             
+            // Map Search Bar
             MapSearchBar(text: $searchText, onSearchButtonClicked: {
                 viewModel.searchForLocation(searchText: searchText)
             })
+            .padding(.horizontal, 16)
             
             // Map View
             Map(coordinateRegion: $viewModel.region, interactionModes: .all, annotationItems: viewModel.selectedCoordinates) { coord in
                 MapPin(coordinate: coord.coordinate)
             }
             .cornerRadius(16)
+            .padding(.horizontal, 16)
             .onTapGesture {
                 let coordinate = viewModel.region.center
                 viewModel.selectLocation(coordinate: coordinate)
@@ -47,11 +43,16 @@ struct LocationSettingView: View {
             .padding(.vertical, 16)
         }
         .navigationBarTitle("場所を設定", displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel, navigationPath: $navigationPath)) {
+        .navigationBarItems(trailing: NavigationLink {
+            ConfirmNewBetView(viewModel: viewModel, showNewBet: $showNewBet)
+        } label: {
             Text("次へ")
+                .font(.headline)
+                .foregroundColor(Color.orange)
         }.simultaneousGesture(TapGesture().onEnded {
             // Set the value here before navigation
             viewModel.locationName = locationName
         }))
     }
+    
 }

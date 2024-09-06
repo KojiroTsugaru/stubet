@@ -24,10 +24,30 @@ struct ContentView: View {
         // Set tab bar appearance
         UITabBar.appearance().backgroundColor = UIColor.white
     }
+    @State private var navigationPath = NavigationPath()
     
     var body: some View {
-        NavigationStack {
-            HomeView()
-        }
+        TabView {
+            // Home tab with NavigationView
+            NavigationView {
+                HomeView()
+            }
+            .tabItem {
+                Image(systemName: "house")
+                Text("ホーム")
+            }
+            
+            // Profile tab with NavigationView (Uncomment when needed)
+//            NavigationView {
+//                ProfileView(userId: "12345")
+//                    .navigationTitle("プロフィール")
+//                    .navigationBarTitleDisplayMode(.inline)
+//            }
+//            .tabItem {
+//                Image(systemName: "person.fill")
+//                Text("プロフィール")
+//            }
+        }.accentColor(Color.orange)
+        
     }
 }

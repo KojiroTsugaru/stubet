@@ -10,7 +10,8 @@ import FirebaseFirestore
 
 struct ConfirmNewBetView: View {
     @ObservedObject var viewModel: SharedBetViewModel
-    @Binding var navigationPath: NavigationPath
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var showNewBet: Bool // Accept showNewBet as a Binding
     
     var body: some View {
         ScrollView {
@@ -101,8 +102,10 @@ struct ConfirmNewBetView: View {
         .navigationTitle("詳細")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: {
-//            viewModel.createBet()
-            navigationPath = NavigationPath() // Dismiss the current view
+            viewModel.createBet()
+             // Dismiss the current view
+            showNewBet = false
+            
         }) {
             Text("ベット作成")
         })

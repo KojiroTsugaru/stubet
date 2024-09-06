@@ -9,36 +9,48 @@ import SwiftUI
 
 struct NewBetView: View {
     @ObservedObject var viewModel: SharedBetViewModel = SharedBetViewModel(currentUserId: "1")
-    @Binding var navigationPath: NavigationPath
-
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var showNewBet: Bool // Accept showNewBet as a Binding
+    
     var body: some View {
-        Form {
-            Section(header: Text("誰にベットする？")) {
-                Picker("名前", selection: $viewModel.selectedFriend) {
-                    Text("選択してください").tag(nil as Friend?)
-                    ForEach(viewModel.friends) { friend in
-                        Text(friend.displayName).tag(friend as Friend?)
+        NavigationView {
+            VStack(spacing: 20) {
+                Form {
+                    Section(header: Text("誰にベットする？")) {
+                        Picker("名前", selection: $viewModel.selectedFriend) {
+                            Text("選択してください").tag(nil as Friend?)
+                            ForEach(viewModel.friends) { friend in
+                                Text(friend.displayName).tag(friend as Friend?)
+                            }
+                        }
+                    }
+                    
+                    Section(header: Text("タイトル")) {
+                        TextField("タイトル", text: $viewModel.title)
+                    }
+                    
+                    Section(header: Text("ベット内容")) {
+                        TextEditor(text: $viewModel.description)
+                            .frame(height: 100)
                     }
                 }
             }
-            
-            Section(header: Text("タイトル")) {
-                TextField("タイトル", text: $viewModel.title)
-            }
-            
-            Section(header: Text("ベット内容")) {
-                TextEditor(text: $viewModel.description)
-                    .frame(height: 100)
-            }
-        }
-        .navigationTitle("ベットを作成")
-        .navigationBarItems(
-            trailing: NavigationLink(destination: TimeSettingView(viewModel: viewModel, navigationPath: $navigationPath)) {
+            .navigationTitle("ベット作成")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("戻る")
+                    .foregroundColor(Color.orange)
+            }), trailing: NavigationLink {
+                TimeSettingView(viewModel: viewModel, showNewBet: $showNewBet)
+            } label: {
                 Text("次へ")
-            }
-        )
+                    .foregroundColor(Color.orange)
+            })
+        }
     }
-
+    
     
     // フォームが有効かどうかの判定
     private var isFormValid: Bool {

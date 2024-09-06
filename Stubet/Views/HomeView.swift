@@ -28,6 +28,8 @@ struct HomeView: View {
     private var db = Firestore.firestore()
     private var listener: ListenerRegistration?
     
+    @State private var showNewBet = false
+    
     init() {
         self.viewModel = HomeViewModel()
     }
@@ -85,6 +87,16 @@ struct HomeView: View {
                 // Optionally stop location updates when the view disappears
 //                locationManager.stopUpdatingLocation()
             }
+            .navigationTitle("ホーム")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(
+                trailing: Button(action: {
+                    showNewBet = true
+                }, label: {
+                    Image(systemName: "plus")
+                        .font(.title2)
+                })
+            )
             .onChange(of: locationManager.isCloseToAnyTarget) { isClose in
                 // Show the modal when the user is close to any target location
                 if isClose {
@@ -95,6 +107,11 @@ struct HomeView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showNewBet, content: {
+                NewBetView(showNewBet: $showNewBet)
+            })
+            
+            
             //自分がミッションクリアモーダル
             .sheet(isPresented: $showingModal) {
                 // The modal content
@@ -123,7 +140,7 @@ struct HomeView: View {
                         showingModal = false
                     }
                 }
-            }
+            }.accentColor(.orange)
             //            ミッションをクリアされた場合のモーダル
             .sheet(isPresented: $showModal) {
                 if let changedBet = changedBet {
@@ -138,13 +155,6 @@ struct HomeView: View {
                     }
                 }
             }
-            
-            .navigationBarItems(
-                trailing: NavigationLink(destination: NewBetView(navigationPath: $navigationPath)) {
-                    Image(systemName: "plus")
-                        .font(.title2)
-                }
-            )
         }.accentColor(.orange)
     }
     

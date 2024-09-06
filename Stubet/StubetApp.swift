@@ -27,10 +27,10 @@ struct StubetApp: App {
 
     var body: some Scene {
         WindowGroup {
-//           ContentView()
-//               .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            HomeView()
-                .environmentObject(locationManager)
+           ContentView()
+               .environment(\.managedObjectContext, persistenceController.container.viewContext)
+               .environmentObject(locationManager)
+//            HomeView()
             // SignupView()
             // LoginView()
         }

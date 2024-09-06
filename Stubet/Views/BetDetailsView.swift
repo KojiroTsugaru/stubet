@@ -22,7 +22,7 @@ struct BetDetailsView: View {
             "senderId": "sender_id",
             "receiverId": "receiver_id",
             "status": "invitePending",
-    //        "status": "inviteRejected",
+            //        "status": "inviteRejected",
             "location": [
                 "name": "千葉大学 1号館",
                 "address": "",
@@ -86,40 +86,12 @@ struct BetDetailsView: View {
                     Text("場所＆時間")
                         .font(.headline)
                         .padding(.bottom, 5)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Image(systemName: "clock")
-                            Text("9:30 A.M - \(bet.deadline.dateValue(), formatter: dateFormatter)")
-                                .font(.subheadline)
-                            
-                            Spacer()
-                            
-                            Text("16時間後")
-                                .foregroundColor(.orange)
-                                .font(.subheadline)
-                        }
-                        
-                        HStack {
-                            Image(systemName: "location")
-                            Text(bet.location.name)
-                                .font(.subheadline)
-                            
-                            Spacer()
-                            
-                            Text("4.5 km")
-                                .font(.subheadline)
-                        }
-                    }
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
+                    EventView()
                 }
-                .padding()
                 
                 // Invite Response Buttons
-                                if bet.status == "invitePending" {
-//                if true {
+                if bet.status == "invitePending" {
+                    //                if true {
                     VStack(spacing: 10) {
                         Button(action: {
                             // 申請を受ける処理
