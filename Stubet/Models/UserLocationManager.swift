@@ -48,6 +48,7 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
 
     // Method to check if user is within proximity of any target location
     private func checkProximity(to targets: [Location], from userLocation: CLLocation) {
+        
         for target in targets {
             let distance = userLocation.distance(from: target.clLocation)
             print("Distance to \(target.name): \(distance) meters")

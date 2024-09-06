@@ -22,13 +22,14 @@ class HomeViewModel: ObservableObject {
     private var db = Firestore.firestore()
     private let currentUserId: String  // Pass the current logged-in user's ID
     
-    // Use the locationManager as an EnvironmentObject
-    @EnvironmentObject var locationManager: UserLocationManager
-    
     init(newMissions: [Mission] = [], ongoingMissions: [Mission] = [],
          rewardPendingBets: [Bet] = [], ongoingBets: [Bet] = []) {
         // UserProviderからcurrentUserIdを取得
-        self.currentUserId = UserProvider.shared.getCurrentUserId() ?? "1"
+//        self.currentUserId = UserProvider.shared.getCurrentUserId() ?? "1"
+        
+        // currentUserIdを手動で設定する
+        self.currentUserId = "12345"
+        
         if newMissions.isEmpty && ongoingMissions.isEmpty && rewardPendingBets.isEmpty && ongoingBets.isEmpty {
             // Fetch from Firebase only if no dummy data is provided
             fetchBets()
@@ -39,7 +40,6 @@ class HomeViewModel: ObservableObject {
             self.rewardPendingBets = rewardPendingBets
             self.ongoingBets = ongoingBets
             // Add the ongoingMissions to the UserLocationManager
-            addOngoingMissionsToLocationManager()
         }
     }
     
@@ -83,19 +83,8 @@ class HomeViewModel: ObservableObject {
                     self.newMissions.append(mission)
                 }
             }
-            
         }
-    }
-    
-    // Add locations from ongoingMissions to the UserLocationManager's targetLocations
-    private func addOngoingMissionsToLocationManager() {
-        for mission in ongoingMissions {
-            
-            let location = mission.location
-            
-            // Add each mission's location to the UserLocationManager
-            locationManager.addTargetLocation(location)
-        }
+        print("on going mission", self.ongoingMissions)
     }
     
     func updateMissionStatus(mission: Mission, newStatus: String) {
