@@ -16,6 +16,7 @@ class SharedBetViewModel: ObservableObject {
     @Published var description: String = ""
     @Published var date: Date = Date()
     @Published var time: Date = Date()
+    @Published var locationName: String?
     @Published var friends: [Friend] = []
     
     
@@ -69,5 +70,39 @@ class SharedBetViewModel: ObservableObject {
     private func addCoordinate(_ coordinate: CLLocationCoordinate2D) {
         let newCoordinate = IdentifiableCoordinate(coordinate: coordinate)
         self.selectedCoordinates = [newCoordinate] // This will allow only one pin at a time. If you want multiple pins, remove the `[ ]`.
+    }
+    
+    // Function to create and upload a new Bet to Firebase
+    func createBet() {
+        // Ensure the location is set
+        guard let location = selectedCoordinates.first?.coordinate else {
+            print("No location selected")
+            return
+        }
+        
+        // Convert CLLocationCoordinate2D to Location object
+        let locationData = Location(data: ["name": self.locationName ?? "", "address": "Sample Address", "latitude": location.latitude, "longitude": location.longitude])
+        
+        // Create the Bet object
+        let newBetData: [String: Any] = [
+            "title": title,
+            "description": description,
+            "deadline": Timestamp(date: date), // Use the date as the deadline
+            "createdAt": Timestamp(date: Date()), // The creation date is now
+            "updatedAt": Timestamp(date: Date()), // Initial value for updatedAt is the same as createdAt
+            "senderId": currentUserId,
+            "receiverId": selectedFriend?.id ?? "", // The friend that was selected
+            "status": "invitePending", // Default status
+            "location": locationData
+        ]
+        
+        // Upload the Bet object to Firestore
+        db.collection("bets").addDocument(data: newBetData) { error in
+            if let error = error {
+                print("Error creating bet: \(error)")
+            } else {
+                print("Bet successfully created!")
+            }
+        }
     }
 }

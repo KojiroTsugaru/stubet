@@ -9,6 +9,7 @@ import MapKit
 
 struct LocationSettingView: View {
     @StateObject var viewModel: SharedBetViewModel
+    @Binding var navigationPath: NavigationPath
     
     @State private var locationName = ""
     @State private var searchText: String = ""
@@ -46,7 +47,7 @@ struct LocationSettingView: View {
             .padding(.vertical, 16)
         }
         .navigationBarTitle("場所を設定", displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel)) {
+        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel, navigationPath: $navigationPath)) {
             Text("次へ")
         }
         )

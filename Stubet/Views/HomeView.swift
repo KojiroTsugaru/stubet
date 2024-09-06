@@ -10,49 +10,59 @@ import FirebaseFirestore
 
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
-    
+    @State private var navigationPath = NavigationPath()
+
     var body: some View {
-        VStack {
-            // Tab Switching: ミッション and ペット buttons
-            HStack {
-                Spacer()
-                Button(action: {
-                    viewModel.selectedTab = .mission
-                }) {
-                    Text("ミッション")
-                        .font(.system(size: 12))
-                        .padding(10)
-                        .background(viewModel.selectedTab == .mission ? Color.orange : Color.clear)
-                        .foregroundColor(viewModel.selectedTab == .mission ? .white : .gray)
-                        .cornerRadius(48)
+        NavigationStack(path: $navigationPath) {
+            VStack {
+                // Tab Switching: ミッション and ベット buttons
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        viewModel.selectedTab = .mission
+                    }) {
+                        Text("ミッション")
+                            .font(.system(size: 12))
+                            .padding(10)
+                            .background(viewModel.selectedTab == .mission ? Color.orange : Color.clear)
+                            .foregroundColor(viewModel.selectedTab == .mission ? .white : .gray)
+                            .cornerRadius(48)
+                    }
+                    Spacer()
+                    Button(action: {
+                        viewModel.selectedTab = .bet
+                    }) {
+                        Text("ベット")
+                            .font(.system(size: 12))
+                            .padding(10)
+                            .background(viewModel.selectedTab == .bet ? Color.orange : Color.clear)
+                            .foregroundColor(viewModel.selectedTab == .bet ? .white : .gray)
+                            .cornerRadius(48)
+                    }
+                    Spacer()
                 }
-                Spacer()
-                Button(action: {
-                    viewModel.selectedTab = .bet
-                }) {
-                    Text("ベット")
-                        .font(.system(size: 12))
-                        .padding(10)
-                        .background(viewModel.selectedTab == .bet ? Color.orange : Color.clear)
-                        .foregroundColor(viewModel.selectedTab == .bet ? .white : .gray)
-                        .cornerRadius(48)
+                .padding(.bottom)
+                
+                // Content depending on the selected tab
+                ScrollView {
+                    if viewModel.selectedTab == .mission {
+                        missionSection
+                    } else {
+                        betSection
+                    }
                 }
-                Spacer()
             }
-            .padding(.bottom)
-            
-            // Content depending on the selected tab
-            ScrollView {
-                if viewModel.selectedTab == .mission {
-                    missionSection
-                } else {
-                    betSection
+            .background(Color(UIColor.systemGroupedBackground))
+            .edgesIgnoringSafeArea(.bottom)
+            .navigationBarItems(
+                trailing: NavigationLink(destination: NewBetView(navigationPath: $navigationPath)) {
+                    Image(systemName: "plus")
+                        .font(.title2)
                 }
-            }
-        }
-        .background(Color(UIColor.systemGroupedBackground))
-        .edgesIgnoringSafeArea(.bottom)
+            )
+        }.accentColor(.orange)
     }
+
     
     var missionSection: some View {
         VStack(alignment: .leading, spacing: 20) {

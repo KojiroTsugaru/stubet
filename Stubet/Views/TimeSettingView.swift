@@ -10,13 +10,12 @@ import SwiftUI
 struct TimeSettingView: View {
     
     @ObservedObject var viewModel: SharedBetViewModel
+    @Binding var navigationPath: NavigationPath // Binding to control navigation
+    
     @Environment(\.presentationMode) var presentationMode
     @State private var showAlert = false
     @State private var alertMessage = ""
     
-    init(viewModel : SharedBetViewModel){
-        self.viewModel = viewModel
-    }
     
     var body: some View {
         VStack(spacing: 20) {
@@ -50,25 +49,24 @@ struct TimeSettingView: View {
         }
         .padding()
         .navigationBarTitle("時間を設定", displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: LocationSettingView(viewModel: viewModel)) {
+        .navigationBarItems(trailing: NavigationLink(destination: LocationSettingView(viewModel: viewModel, navigationPath: $navigationPath)) {
             Text("次へ")
-        }
-        )
+        })
         .alert(isPresented: $showAlert) {
             Alert(title: Text("エラー"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
 }
 
-struct TimeSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = SharedBetViewModel(currentUserId: "1")
-        return NavigationView {
-            TimeSettingView(viewModel: viewModel)
-        }
-    }
-    
-    #Preview {
-        TimeSettingView_Previews.previews
-    }
-}
+//struct TimeSettingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let viewModel = SharedBetViewModel(currentUserId: "1")
+//        return NavigationView {
+//            TimeSettingView(viewModel: viewModel, navigationPath: NavigationPath())
+//        }
+//    }
+//    
+//    #Preview {
+//        TimeSettingView_Previews.previews
+//    }
+//}
