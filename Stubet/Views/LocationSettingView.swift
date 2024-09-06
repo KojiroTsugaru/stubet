@@ -49,20 +49,9 @@ struct LocationSettingView: View {
         .navigationBarTitle("場所を設定", displayMode: .inline)
         .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel, navigationPath: $navigationPath)) {
             Text("次へ")
-        }
-        )
+        }.simultaneousGesture(TapGesture().onEnded {
+            // Set the value here before navigation
+            viewModel.locationName = locationName
+        }))
     }
 }
-
-//struct AddLocationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LocationSettingView()
-//    }
-//}
-
-
-
-
-//#Preview {
-//    LocationSettingView()
-//}
