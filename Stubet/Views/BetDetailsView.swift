@@ -6,10 +6,35 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct BetDetailsView: View {
-
+    
     let bet: Bet
+    
+    init() {
+        self.bet = Bet(id: "example_id", data: [
+            "title": "明日の一限遅刻したらラーメン奢りで！",
+            "description": "もし明日の一限に遅刻したら、ラーメンを奢ることになります。頑張って早起きしましょう！",
+            "deadline": Timestamp(date: dateFormatter.date(from: "09/02/2024 9:30 AM") ?? Date()),
+            "createdAt": Timestamp(date: Date()),
+            "updatedAt": Timestamp(date: Date()),
+            "senderId": "sender_id",
+            "receiverId": "receiver_id",
+            "status": "invitePending",
+            //        "status": "inviteRejected",
+            "location": [
+                "name": "千葉大学 1号館",
+                "address": "",
+                "latitude": 0.0,
+                "longitude": 0.0
+            ]
+        ])
+    }
+    
+    init (bet: Bet) {
+        self.bet = bet
+    }
     
     var body: some View {
         ScrollView {
@@ -61,36 +86,37 @@ struct BetDetailsView: View {
                     Text("場所＆時間")
                         .font(.headline)
                         .padding(.bottom, 5)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Image(systemName: "clock")
-                            Text("9:30 A.M - \(bet.deadline.dateValue(), formatter: dateFormatter)")
-                                .font(.subheadline)
-                            
-                            Spacer()
-                            
-                            Text("16時間後")
-                                .foregroundColor(.orange)
-                                .font(.subheadline)
+                    MapEventView()
+                }
+                
+                // Invite Response Buttons
+                if bet.status == "invitePending" {
+                    //                if true {
+                    VStack(spacing: 10) {
+                        Button(action: {
+                            // 申請を受ける処理
+                        }) {
+                            Text("受ける")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.orange)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                         
-                        HStack {
-                            Image(systemName: "location")
-                            Text(bet.location.name)
-                                .font(.subheadline)
-                            
-                            Spacer()
-                            
-                            Text("4.5 km")
-                                .font(.subheadline)
+                        Button(action: {
+                            // 申請を拒否する処理
+                        }) {
+                            Text("拒否する")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                     }
                     .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
                 }
-                .padding()
                 
                 Spacer()
             }

@@ -9,22 +9,26 @@ import MapKit
 
 struct LocationSettingView: View {
     @StateObject var viewModel: SharedBetViewModel
+    @Binding var showNewBetModal: Bool // Accept showNewBet as a Binding
     
     @State private var locationName = ""
     @State private var searchText: String = ""
     
     var body: some View {
-        VStack {
+        VStack(spacing: 16) {
             
+            // Map Search Bar
             MapSearchBar(text: $searchText, onSearchButtonClicked: {
                 viewModel.searchForLocation(searchText: searchText)
             })
+            .padding(.horizontal, 16)
             
             // Map View
             Map(coordinateRegion: $viewModel.region, interactionModes: .all, annotationItems: viewModel.selectedCoordinates) { coord in
                 MapPin(coordinate: coord.coordinate)
             }
             .cornerRadius(16)
+            .padding(.horizontal, 16)
             .onTapGesture {
                 let coordinate = viewModel.region.center
                 viewModel.selectLocation(coordinate: coordinate)
@@ -46,17 +50,16 @@ struct LocationSettingView: View {
             .padding(.vertical, 16)
         }
         .navigationBarTitle("場所を設定", displayMode: .inline)
-        //        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel)) {
-        //            Text("次へ")
-        //        }
-        .navigationBarItems(trailing: NavigationLink(destination: ConfirmNewBetView(viewModel: viewModel)) {
-            Button(action: {
-                viewModel.locationName = self.locationName
-            }, label: {
-                Text("次へ")
-            })
-        }
-        )
+        .navigationBarItems(trailing: NavigationLink {
+            ConfirmNewBetView(viewModel: viewModel, showNewBetModal: $showNewBetModal)
+        } label: {
+            Text("次へ")
+                .font(.headline)
+                .foregroundColor(Color.orange)
+        }.simultaneousGesture(TapGesture().onEnded {
+            // Set the value here before navigation
+            viewModel.locationName = locationName
+        }))
     }
 }
 

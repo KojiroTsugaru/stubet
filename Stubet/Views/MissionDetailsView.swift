@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct MissionDetailsView: View {
-
+    
     let mission: Mission
+    
+    init (mission: Mission) {
+        self.mission = mission
+    }
     
     var body: some View {
         ScrollView {
@@ -23,11 +28,11 @@ struct MissionDetailsView: View {
                         
                         Spacer()
                         
-                        Text("進行中")
+                        Text(mission.status == "ongoing" ? "進行中" : "許可待ち")
                             .font(.subheadline)
                             .foregroundColor(.white)
-                            .padding(5)
-                            .background(Color.orange)
+                            .padding(8)
+                            .background(mission.status == "ongoing" ? Color.orange : Color.red)
                             .cornerRadius(10)
                     }
                     
@@ -61,36 +66,38 @@ struct MissionDetailsView: View {
                     Text("場所＆時間")
                         .font(.headline)
                         .padding(.bottom, 5)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Image(systemName: "clock")
-                            Text("9:30 A.M - \(mission.deadline.dateValue(), formatter: dateFormatter)")
-                                .font(.subheadline)
+                    MapEventView()
+                }
+                
+                // Invite Response Buttons
+                if mission.status == "invitePending" {
+                    //                if true {
+                    VStack(spacing: 10) {
+                        Button(action: {
+                            // 申請を受ける処理
                             
-                            Spacer()
-                            
-                            Text("16時間後")
-                                .foregroundColor(.orange)
-                                .font(.subheadline)
+                        }) {
+                            Text("受ける")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.orange)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                         
-                        HStack {
-                            Image(systemName: "location")
-                            Text(mission.location.name)
-                                .font(.subheadline)
-                            
-                            Spacer()
-                            
-                            Text("4.5 km")
-                                .font(.subheadline)
+                        Button(action: {
+                            // 申請を拒否する処理
+                        }) {
+                            Text("拒否する")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
                     }
                     .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
                 }
-                .padding()
                 
                 Spacer()
             }

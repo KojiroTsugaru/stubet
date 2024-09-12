@@ -9,7 +9,12 @@ import SwiftUI
 import FirebaseFirestore
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel: HomeViewModel
+    @State private var showNewBetModal = false
+    
+    init() {
+        self.viewModel = HomeViewModel()
+    }
     
     var body: some View {
         VStack {
@@ -52,6 +57,17 @@ struct HomeView: View {
         }
         .background(Color(UIColor.systemGroupedBackground))
         .edgesIgnoringSafeArea(.bottom)
+        .navigationBarItems(
+            trailing: Button(action: {
+                showNewBetModal = true
+            }, label: {
+                Image(systemName: "plus")
+                    .font(.title2)
+            })
+        )
+        .sheet(isPresented: $showNewBetModal, content: {
+            NewBetView(showNewBetModal: $showNewBetModal)
+        })
     }
     
     var missionSection: some View {
@@ -174,7 +190,7 @@ struct HomeView_Previews: PreviewProvider {
             ongoingBets: dummyBets
         )
         
-        return HomeView(viewModel: viewModel)
+        return HomeView()
     }
 }
 
