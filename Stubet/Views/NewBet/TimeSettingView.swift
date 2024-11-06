@@ -7,7 +7,8 @@ struct TimeSettingView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @Binding var showNewBet: Bool // Accept showNewBet as a Binding
-    
+    @Binding var showingClearModal: Bool
+
     var body: some View {
         VStack(spacing: 40) {
             Spacer() // Push content toward the center for better alignment
@@ -52,7 +53,7 @@ struct TimeSettingView: View {
         }
         .padding()
         .navigationBarTitle("時間を設定", displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: LocationSettingView(viewModel: viewModel, showNewBet: $showNewBet)) {
+        .navigationBarItems(trailing: NavigationLink(destination: LocationSettingView(viewModel: viewModel, showNewBet: $showNewBet, showingClearModal: $showingClearModal)) {
             Text("次へ")
                 .font(.headline)
                 .foregroundColor(.orange)

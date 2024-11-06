@@ -12,6 +12,7 @@ struct ConfirmNewBetView: View {
     @ObservedObject var viewModel: SharedBetViewModel
     @Environment(\.presentationMode) var presentationMode
     @Binding var showNewBet: Bool // Accept showNewBet as a Binding
+    @Binding var showingClearModal: Bool
     
     var body: some View {
         ScrollView {
@@ -102,9 +103,14 @@ struct ConfirmNewBetView: View {
         .navigationTitle("詳細")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: {
-            viewModel.createBet()
+//            viewModel.createBet()
              // Dismiss the current view
             showNewBet = false
+    
+            // Show the second modal after the first is dismissed
+            DispatchQueue.main.asyncAfter(deadline: .now() + 30) {
+                showingClearModal = true
+            }
             
         }) {
             Text("ベット作成")

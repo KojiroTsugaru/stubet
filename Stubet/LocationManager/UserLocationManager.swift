@@ -25,6 +25,7 @@ class UserLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate
 
         // Request permission
         locationManager.requestWhenInUseAuthorization()
+//        locationManager.requestAlwaysAuthorization()
     }
 
     // Method to start updating the location

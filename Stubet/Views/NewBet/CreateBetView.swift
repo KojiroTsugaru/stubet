@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct NewBetView: View {
+struct CreateBetView: View {
     @ObservedObject var viewModel: SharedBetViewModel = SharedBetViewModel(currentUserId: "1")
     @Environment(\.presentationMode) var presentationMode
     @Binding var showNewBet: Bool // Accept showNewBet as a Binding
+    @Binding var showingClearModal: Bool
     
     var body: some View {
         NavigationView {
@@ -43,7 +44,7 @@ struct NewBetView: View {
                 Text("戻る")
                     .foregroundColor(Color.orange)
             }), trailing: NavigationLink {
-                TimeSettingView(viewModel: viewModel, showNewBet: $showNewBet)
+                TimeSettingView(viewModel: viewModel, showNewBet: $showNewBet, showingClearModal: $showingClearModal)
             } label: {
                 Text("次へ")
                     .foregroundColor(Color.orange)

@@ -16,19 +16,21 @@ struct HomeView: View {
     // Use the locationManager as an EnvironmentObject
     @EnvironmentObject var locationManager: UserLocationManager
     
-    @State private var showingModal = false
+    @State private var showingClearModal = false
     
     // Track the nearest mission location to the user gets close to
     @State private var nearestMission: Mission?
     
     @State private var bets: [Bet] = []
-    @State private var showModal: Bool = false
+    @State private var showModal: Bool = false  
     @State private var changedBet: Bet? // Track which bet changed
-
+    
     private var db = Firestore.firestore()
     private var listener: ListenerRegistration?
     
     @State private var showNewBet = false
+    
+    @State var showModalAfter40 = false
     
     init() {
         self.viewModel = HomeViewModel()
@@ -77,16 +79,6 @@ struct HomeView: View {
             }
             .background(Color(UIColor.systemGroupedBackground))
             .edgesIgnoringSafeArea(.bottom)
-            .onAppear {
-//                listenToBetCollection()
-                // Start updating the location when the view appears
-//                locationManager.startUpdatingLocation()
-            }
-            .onDisappear {
-//                listener?.remove() // Clean up the listener when the view disappears
-                // Optionally stop location updates when the view disappears
-//                locationManager.stopUpdatingLocation()
-            }
             .navigationTitle("ホーム")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(
@@ -97,51 +89,26 @@ struct HomeView: View {
                         .font(.title2)
                 })
             )
-            .onChange(of: locationManager.isCloseToAnyTarget) { isClose in
-                // Show the modal when the user is close to any target location
-                if isClose {
-                    if let targetLocation = locationManager.nearestLocation {
-                        // Find the mission corresponding to the location
-                        nearestMission = viewModel.ongoingMissions.first(where: { $0.location.name == targetLocation.name })
-                        showingModal = true
-                    }
-                }
-            }
             .sheet(isPresented: $showNewBet, content: {
-                NewBetView(showNewBet: $showNewBet)
+                CreateBetView(showNewBet: $showNewBet, showingClearModal: $showingClearModal)
             })
             
             
             //自分がミッションクリアモーダル
-            .sheet(isPresented: $showingModal) {
+            .sheet(isPresented: $showingClearModal) {
                 // The modal content
-                VStack {
-                    if let target = locationManager.nearestLocation {
-                        VStack(spacing: 2) {
-                            Text("ミッションをクリアしました!")
-                                .font(.title)
-                                .padding()
-                            Text("ミッション \(target.name)!")
-                            Text("Address: \(target.address)")
-                        }.background(Color.orange)
-                    } else {
-                        Text("ミッションをクリアしました!")
-                            .font(.title)
-                            .padding()
-                    }
+                VStack(spacing: 10) {
+                    Text("ミッションをクリアしました!")
+                        .font(.title)
+                        .padding()
+                    Text("ミッション アーク森ビル!")
                     Button("閉じる") {
-                        if let missionToUpdate = nearestMission {
-                            // Change the status of the mission to "rewardPending"
-                            viewModel.updateMissionStatus(mission: missionToUpdate, newStatus: "rewardPending")
-                            locationManager.removeTargetLocation(missionToUpdate.location.name)
-                        }
-                        
-                        nearestMission = nil
-                        showingModal = false
+                        showingClearModal = false
                     }
-                }
-            }.accentColor(.orange)
-            //            ミッションをクリアされた場合のモーダル
+                }.background(Color.orange)
+            }
+        }.accentColor(.orange)
+        //            ミッションをクリアされた場合のモーダル
             .sheet(isPresented: $showModal) {
                 if let changedBet = changedBet {
                     VStack {
@@ -154,95 +121,94 @@ struct HomeView: View {
                         }
                     }
                 }
-            }
-        }.accentColor(.orange)
-    }
-    
-    
-    var missionSection: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            if viewModel.newMissions.count > 0 {
-                Text("新しいミッションが届いています")
-                    .font(.headline)
-                    .padding(.leading)
-                
-                ForEach(viewModel.newMissions) { mission in
-                    NavigationLink(destination: MissionDetailsView(mission: mission)) {
-                        MissionRowView(mission: mission, isNew: true)
-                    }
-                    .padding(.horizontal)
-                }
-            }
+            }.accentColor(.orange)
+}
+
+
+var missionSection: some View {
+    VStack(alignment: .leading, spacing: 20) {
+        if viewModel.newMissions.count > 0 {
+            Text("新しいミッションが届いています")
+                .font(.headline)
+                .padding(.leading)
             
-            if viewModel.ongoingMissions.count > 0 {
-                Text("進行中のミッション")
-                    .font(.headline)
-                    .padding(.leading)
-                
-                ForEach(viewModel.ongoingMissions) { mission in
-                    NavigationLink(destination: MissionDetailsView(mission: mission)) {
-                        MissionRowView(mission: mission, isNew: false)
-                    }
-                    .padding(.horizontal)
+            ForEach(viewModel.newMissions) { mission in
+                NavigationLink(destination: MissionDetailsView(mission: mission)) {
+                    MissionRowView(mission: mission, isNew: true)
                 }
-            } else {
-                Text("進行中のミッションはありません")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .offset(y: 250)
+                .padding(.horizontal)
             }
         }
-    }
-    
-    // MARK: - Bet Section
-    var betSection: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            if viewModel.rewardPendingBets.count > 0 {
-                Text("報酬を受け取っていません！")
-                    .font(.headline)
-                    .padding(.leading)
-                
-                ForEach(viewModel.rewardPendingBets) { bet in
-                    NavigationLink(destination: BetDetailsView(bet: bet)) {
-                        BetRowView(bet: bet, isNew: true)
-                    }
-                    .padding(.horizontal)
-                }
-            }
+        
+        if viewModel.ongoingMissions.count > 0 {
+            Text("進行中のミッション")
+                .font(.headline)
+                .padding(.leading)
             
-            if viewModel.ongoingBets.count > 0 {
-                Text("進行中のベット")
-                    .font(.headline)
-                    .padding(.leading)
-                
-                ForEach(viewModel.ongoingBets) { bet in
-                    NavigationLink(destination: BetDetailsView(bet: bet)) {
-                        BetRowView(bet: bet, isNew: false)
-                    }
-                    .padding(.horizontal)
+            ForEach(viewModel.ongoingMissions) { mission in
+                NavigationLink(destination: MissionDetailsView(mission: mission)) {
+                    MissionRowView(mission: mission, isNew: false)
                 }
-            } else {
-                Text("進行中ベットはありません")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .offset(y: 250)
+                .padding(.horizontal)
             }
+        } else {
+            Text("進行中のミッションはありません")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .offset(y: 250)
         }
     }
-    
-    // Function to listen to the bets collection in Firestore
+}
+
+// MARK: - Bet Section
+var betSection: some View {
+    VStack(alignment: .leading, spacing: 20) {
+        if viewModel.rewardPendingBets.count > 0 {
+            Text("報酬を受け取っていません！")
+                .font(.headline)
+                .padding(.leading)
+            
+            ForEach(viewModel.rewardPendingBets) { bet in
+                NavigationLink(destination: BetDetailsView(bet: bet)) {
+                    BetRowView(bet: bet, isNew: true)
+                }
+                .padding(.horizontal)
+            }
+        }
+        
+        if viewModel.ongoingBets.count > 0 {
+            Text("進行中のベット")
+                .font(.headline)
+                .padding(.leading)
+            
+            ForEach(viewModel.ongoingBets) { bet in
+                NavigationLink(destination: BetDetailsView(bet: bet)) {
+                    BetRowView(bet: bet, isNew: false)
+                }
+                .padding(.horizontal)
+            }
+        } else {
+            Text("進行中ベットはありません")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .offset(y: 250)
+        }
+    }
+}
+
+// Function to listen to the bets collection in Firestore
 //        private func listenToBetCollection() {
 //            listener = db.collection("bets").addSnapshotListener { snapshot, error in
 //                guard let snapshot = snapshot else {
 //                    print("Error fetching snapshot: \(error!)")
 //                    return
 //                }
-//                
+//
 //                var updatedBets: [Bet] = []
-//                
+//
 //                snapshot.documentChanges.forEach { diff in
 //                    let data = diff.document.data()
 //                    let betId = diff.document.documentID
 //                    let bet = Bet(id: betId, data: data)
-//                    
+//
 //                    // Check if the change is a modification and if the status field changed
 //                    if diff.type == .modified {
 //                        if let index = bets.firstIndex(where: { $0.id == betId }) {
@@ -254,11 +220,11 @@ struct HomeView: View {
 //                            }
 //                        }
 //                    }
-//                    
+//
 //                    // Update the bet list regardless of the change type
 //                    updatedBets.append(bet)
 //                }
-//                
+//
 //                // Update the local bets list
 //                bets = updatedBets
 //            }
@@ -275,7 +241,7 @@ struct HomeView: View {
 //            "latitude": 35.6586,
 //            "longitude": 139.7454
 //        ])
-//        
+//
 //        // Dummy bets
 //        let dummyBets = [
 //            Bet(id: "1", data: [
@@ -306,7 +272,7 @@ struct HomeView: View {
 //        let dummyMissions = dummyBets.map { bet -> Mission in
 //            return Mission(from: bet)
 //        }
-//        
+//
 //        // Initialize HomeViewModel with dummy data
 //        let viewModel = HomeViewModel(
 //            newMissions: dummyMissions,
@@ -314,7 +280,7 @@ struct HomeView: View {
 //            rewardPendingBets: dummyBets,
 //            ongoingBets: dummyBets
 //        )
-//        
+//
 //        return HomeView()
 //    }
 //}

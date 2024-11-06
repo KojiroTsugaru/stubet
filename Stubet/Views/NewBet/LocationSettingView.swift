@@ -6,6 +6,7 @@ struct LocationSettingView: View {
     @State private var locationName = ""
     @State private var searchText: String = ""
     @Binding var showNewBet: Bool // Accept showNewBet as a Binding
+    @Binding var showingClearModal: Bool
     
     var body: some View {
         VStack(spacing: 16) {
@@ -44,7 +45,7 @@ struct LocationSettingView: View {
         }
         .navigationBarTitle("場所を設定", displayMode: .inline)
         .navigationBarItems(trailing: NavigationLink {
-            ConfirmNewBetView(viewModel: viewModel, showNewBet: $showNewBet)
+            ConfirmNewBetView(viewModel: viewModel, showNewBet: $showNewBet, showingClearModal: $showingClearModal)
         } label: {
             Text("次へ")
                 .font(.headline)
