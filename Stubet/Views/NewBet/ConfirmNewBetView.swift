@@ -103,7 +103,10 @@ struct ConfirmNewBetView: View {
         .navigationTitle("詳細")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: Button(action: {
+            
 //            viewModel.createBet()
+            
+            
              // Dismiss the current view
             showNewBet = false
     

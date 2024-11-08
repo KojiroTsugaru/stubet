@@ -148,6 +148,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3112A92B2CDE34E100061D0C /* BetManager */ = {
+			isa = PBXGroup;
+			children = (
+				317580F72C8700E600DD5B13 /* BetModel.swift */,
+				317580F52C86FF3600DD5B13 /* MissionModel.swift */,
+			);
+			path = BetManager;
+			sourceTree = "<group>";
+		};
 		311A57492C86D94A0040AA9A = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				311A57842C86DFF00040AA9A /* Views */,
+				3112A92B2CDE34E100061D0C /* BetManager */,
 				4CA5B7152C89C68300158688 /* UserProviders */,
 				31BB214D2CDBEBD800260C7D /* AccountManager */,
 				31BB214E2CDBEC1A00260C7D /* LocationManager */,
@@ -233,8 +243,6 @@
 				317581132C89642E00DD5B13 /* MissionDetailsView.swift */,
 				317581112C89589D00DD5B13 /* BetDetailsView.swift */,
 				311238972C8AB0A300EC7DBC /* MapEventView.swift */,
-				317580F52C86FF3600DD5B13 /* MissionModel.swift */,
-				317580F72C8700E600DD5B13 /* BetModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
