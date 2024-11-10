@@ -1,7 +1,7 @@
 # stubet
 外資就活ハッカソン用プロジェクト
 概要
-Stubetは、外資就活ドットコム主催のEngineer Guild Hackathonで開発されたiOSアプリです。このアプリは、日常生活の「集合」をもっと楽しくすることかた着想を得て開発に至りました。
+Stubetは、外資就活ドットコム主催のEngineer Guild Hackathonで開発されたiOSアプリです。このアプリは、日常生活の「集合」をもっと楽しくすることから着想を得て開発に至りました。
 
 # デモ
 https://drive.google.com/file/d/1AZCCCvDYSikKYAOXOPZso3FoJ972Npy5/view?usp=sharing
